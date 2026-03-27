@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Responsivo para móvel-->
+    <title>EyesEveryWhere</title> <!-- Título da página -->
+    <link rel="stylesheet" href="dashboard.css"> <!-- Link para o CSS -->
+    <link href="https://unpkg.com/lucide-icons/dist/umd/lucide-icons.min.js" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="minilogo.png"> <!-- Favicon -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Biblioteca para gráficos -->
+</head>
+<body>
+    <!-- Estrutura principal -->
+    <div class="container">
+
+        <!-- Página Principal -->
+        <div class="main-content">
+
+            <!-- Cabeçalho -->
+            <header>
+            <div class="header-right">
+            </div>
+                <!-- Centro -->
+                <div class="page-selector">
+                    <button class="page-dropdown-btn">
+                        Dashboards
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="page-dropdown-content">
+                        <a href="dashboard.html" class="active">Dashboards</a>
+                        <a href="../Peritos/peritos.html">Peritos</a>
+                        <a href="../Ocorrência/ocorrencia.html">Ocorrências</a>
+                        <a href="../Auditoria/ListaAuditorias/ListaAuditorias.html">Auditorias</a>
+                    </div>
+                </div>
+
+                <!-- Perfil -->
+                <div class="header-right">
+                    <!-- LOGO -->
+                    <div class="avatar">
+                        <img src="../Login/logo.png" alt="Avatar" width="60" height="60">
+                    </div>
+                </div>
+            </header>
+
+
+            <!-- Dashboard Cards -->
+             <div class="dashboard-grid">
+            <!-- ocorrencias realizadas por área -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Ocorrências criadas por área</div>
+                </div>
+                <div class="area-percentages">
+                    <div class="area-item top-left">
+                        <span class="area-label">Buraco na Estrada</span>
+                        <span class="area-value" style="color: #5664d2;">40%</span>
+                    </div>
+                    <div class="area-item top-right">
+                        <span class="area-label">Passeio Danificado</span>
+                        <span class="area-value" style="color: #abd2ff;">32%</span>
+                    </div>
+                    <div class="area-item bottom-left">
+                        <span class="area-label">Falta de Sinalização</span>
+                        <span class="area-value" style="color: #363945;">28%</span>
+                    </div>
+                    <div class="area-item bottom-right">
+                        <span class="area-label">Iluminação Pública</span>
+                        <span class="area-value" style="color: #e0e6ff;">28%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profissionais Disponíveis -->
+            <div class="card">
+                <div class="metric-card">
+                    <div class="metric-icon" style="background-color: #f0f4ff;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#5664d2" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="9" cy="7" r="4" stroke="#5664d2" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#5664d2" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#5664d2" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="profissionais-disponiveis">11k</div>
+                    <div class="stat-label">Profissionais Disponíveis</div>
+                </div>
+            </div>
+            
+            <!-- Auditorias Resolvidas -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Auditorias a ser Resolvidas</div>
+                </div>
+                <div class="list" id="auditorias-resolvidas-list">
+                    <!-- Os nomes das auditorias vão aparecer aqui -->
+                </div>
+            </div>
+            
+  
+            <!-- Profissionais em Ação -->
+            <div class="card">
+                <div class="metric-card">
+                    <div class="metric-icon" style="background-color: #f0f4ff;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#5664d2" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="9" cy="7" r="4" stroke="#5664d2" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#5664d2" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#5664d2" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="profissionais-em-acao">0</div>
+                    <div class="stat-label">Profissionais em Ação</div>
+                </div>
+            </div>
+            
+            <!-- Auditorias Aceites -->
+            <div class="card">
+                <div class="metric-card">
+                    <div class="metric-icon" style="background-color: #f0f4ff;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#5664d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="#5664d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="auditorias-aceites">973</div>
+                    <div class="stat-label">Auditorias Aceites</div>
+                </div>
+            </div>
+            
+            <!-- Ocorrências em Espera -->
+            <div class="card">
+                <div class="metric-card">
+                    <div class="metric-icon" style="background-color: #f0f4ff;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#5664d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 4L12 14.01l-3-3" stroke="#5664d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value" id="ocorrencias-em-espera">973</div>
+                    <div class="stat-label">Ocorrências em Espera</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Importar icones (lucide)-->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script> lucide.createIcons(); </script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,716 @@
+/* Variáveis Globais*/ 
+/* Cores */
+:root {
+    --primary-color: #03045e; /* principal */
+    --danger-color: #dc3545; /* alerta */
+    --text-gray: #6c757d; /* texto secundário */
+    --bg-hover: #111b29; /* passar por cima(sidebar) */
+    --bg-light: #f8f9fa; /* cor de fundo */
+    --border-color: #dfdfdf; /* bordas/separadores */
+}
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-light);
+}
+
+/* Estrutura */
+.container {
+    display: flex;
+    height: 100vh;/* Altura total da tela */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Título com linhas separadas e alinhado à esquerda */
+.logo {
+    background-color: white;
+    padding: 1.5rem 1rem 1rem 1rem;
+    border-bottom: 1px solid #ddd;
+    line-height: 0.4; /* altura do retangulo do titulo */
+}
+    /* Titulo Eyes*/
+    .logo div:first-child {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        text-align: left;
+    }
+    /* Titulo EveryWhere*/
+    .logo div:last-child {
+        font-size: 1.7rem;
+        font-weight: 400;
+        color: var(--primary-color);
+        text-align: right;
+    }
+ 
+/* Menu Lateral */
+.menu-item {
+    padding: 1.9rem 1.25rem; /* espaçamento do texto */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 1.1rem; /* tamanho do texto */
+    transition: background-color 0.2s;
+}
+    /* ao passar o mouse por cima */
+    .menu-item:hover {
+        background-color: var(--bg-hover);
+    }
+
+    /* Ícones alinhados */
+    .menu-item i,
+    .menu-item-content i {
+        width: 20px;
+        min-width: 20px;
+        text-align: center;
+    }
+
+/* Submenus (tipoAuditoria e Estado) */
+.submenu {
+    padding-left: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+}
+    /* ponto do submenu */
+    .submenu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem 1rem;
+        width: 100%;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        text-align: left;
+        font-size: 0.9rem; /* tamanho do texto do submenu*/
+    }
+        /* ao passar o mouse por cima do submenu */
+        .submenu-item:hover {
+            background-color: var(--bg-hover) !important;
+        }
+        /* ponto do submenu aberto */
+        .submenu-item.active {
+            background-color: var(--bg-hover);
+        }
+
+        .submenu-item.active .dot {
+            background-color: var(--primary-color);
+        }
+
+        /* ponto */
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+        }
+        
+        .menu-item.active {
+            background-color: var(--bg-hover);
+        }
+
+
+/* Parte Principal */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+    /* cabeçalho */
+    header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem; /* altura do cabeçalho */
+        border-bottom: 1px solid var(--border-color);
+    }
+    /* espaço para os Botões Adicionar e Remover */
+    .header-left, .header-right {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+/* Botões Adicionar e Remover*/
+.btn {
+    border: none;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+    /* cor dos botões */
+    .btn-primary, .btn-danger {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+/* filtros */    
+.filters {
+    display: flex;
+    gap: 3rem; /* espaço entre os filtros */
+    align-items: center;
+    max-width: 1600px; /* largura máxima dos filtros */ 
+    margin: 1.5rem auto; /* margem superior */
+    padding: 0 2rem;
+}
+    /* texto dos filtros */
+    .filters input {
+        padding: 0.5rem 1.25rem;
+        border: 1px solid var(--border-color);
+        border-radius: 9999px;
+        font-size: 1rem; /* tamanho do texto */
+        color: var(--text-gray);
+        transition: border-color 0.2s ease;
+        width: 200px; /* largura do input */
+    }
+
+    /* botão pesquisa */
+    .search-icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+        /* estilo */
+        .search-icon-btn img {
+            width: 30px; /* ou 20px se quiseres mais pequeno */
+            height: 30px;
+            filter: grayscale(100%) opacity(0.6);
+            transition: filter 0.2s ease;
+        }
+        /* ao passar o mouse por cima */
+        .search-icon-btn:hover img {
+            filter: grayscale(0%) opacity(1);
+        }
+
+/* permitir icones/setas ao lado do titulo */
+.header-cell {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+/* tabela */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+    /* cabeçalho e células da tabela */
+    th, td {
+        padding: 0.75rem;
+        text-align: center;
+    }
+        /* cabeçalho da tabela */
+        th {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        /* linha divisoria entre células */
+        tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+        /* mais espaçamento entre as células */
+        tbody td {
+            padding: 1.5rem; 
+        }
+        /* ao passar o mouse por cima da linha da tabela */
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+
+/* Id */
+.auditoria-id {
+  font-size: 0.95rem;
+  color: #999;
+  font-weight: normal;
+}
+/* nome */
+.auditoria-nome {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+/* ESTADO */
+/* estilo geral */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    display: inline-block;
+}
+    /* concluída */
+    .status-available {
+        background-color: #dcfce7;
+        color: #166534;
+    }
+
+    /* não iniciada*/
+    .status-unavailable {
+        background-color: #fee2e2;
+        color: #991b1b;
+    }
+
+    /* em progresso */
+    .status-audit {
+        background-color: #fef9c3;
+        color: #854d0e;
+    }
+
+/* URGENCIA */
+/* estilo geral */
+.urgencia-5 {
+    background-color: #f5b7b1;
+    color: #7b241c;
+}
+.urgencia-4 {
+    background-color: #ffddb3;
+    color: #935116;
+}
+.urgencia-3 {
+    background-color: #fff3b0;
+    color: #7d6608;
+}
+.urgencia-2 {
+    background-color: #c8f7c5;
+    color: #145a32;
+}
+.urgencia-1 {
+    background-color: #b3d9ff;
+    color: #003366;
+}
+
+/* RODAPÉ */
+/* paginação */
+    /* estilo geral */
+    .pagination {
+        margin-top: auto;
+        padding: 1rem;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 600px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        position: sticky;
+        bottom: 0;
+        background-color: white;
+    }
+    /* elementos da paginação (16 e pagina) */
+    .pagination-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+/* botões de paginação */
+    /* estilo geral */
+    .pagination-buttons {
+        display: flex;
+    }
+    .pagination-buttons button {
+        border: 1px solid var(--border-color);
+        padding: 0.25rem 0.5rem;
+        background: white;
+        cursor: pointer;
+        min-width: 28px;
+        text-align: center;
+    }
+    /* botões desativados não clicáveis */
+    .pagination-buttons button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    /* botão da página ativa*/
+    .pagination-buttons button.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+/* estilo do nº de auditorias que aparecem */
+.pagination-controls select {
+    padding: 0.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: 60px;
+}
+
+.avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #eff2f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expert-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.expert-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.expert-email {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    color: #666;
+}
+
+.btn-icon:hover {
+    color: #333;
+}
+
+/* Page Selector Styles */
+.page-selector {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.page-dropdown-btn {
+    background-color: var(--bg-light);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.page-dropdown-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.page-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    z-index: 1000;
+}
+
+.page-dropdown-content a {
+    color: var(--text-gray);
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+.page-dropdown-content a:hover {
+    background-color: var(--bg-light);
+}
+
+.page-dropdown-content a.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.page-selector:hover .page-dropdown-content {
+    display: block;
+}
+
+/* CAIXA DA CÉLULA DA TABELA*/
+    /* Estilo geral da célula da tabela */
+    .card-container {
+        margin: 1rem 2rem;
+        padding: 1.5rem;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        max-width: 1600px; /* Increased from 1400px */
+        margin-left: auto;
+        margin-right: auto;
+        height: calc(100vh - 250px); /* Add fixed height based on viewport */
+        overflow: auto; /* Add scroll if content overflows */
+    }
+
+    /* Estilo do input de data */
+    input[type="date"] {
+        padding: 0.5rem 1.25rem;
+        border: 1px solid var(--border-color);
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        color: var(--text-gray);
+        transition: border-color 0.2s ease;
+        width: 200px;
+        cursor: pointer;
+    }
+
+    /* Ícone do calendário */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        background-color: white;
+        border-radius: 50%;
+        padding: 0.25rem;
+        color: white;
+        cursor: pointer;
+        opacity: 0.6;
+        margin-left: 0.5rem;
+    }
+
+    /* Ao passar o mouse por cima */
+    input[type="date"]:hover::-webkit-calendar-picker-indicator {
+        opacity: 1;
+    }
+
+/* ================= 3 Pontos ================= */
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal:not(.hidden) {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    padding: 40px 50px;
+    border-radius: 20px;
+    width: 1000px;
+    max-width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    font-family: Arial, sans-serif;
+    animation: fadeIn 0.2s ease-out;
+    z-index: 1000;
+}
+
+#customAlertModal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* centra o texto */
+    min-width: 300px;
+    min-height: 120px;
+}
+
+@keyframes fadeIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+/* ================= GRID DE DETALHES ================= */
+.detalhes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 50px;
+    margin-bottom: 30px;
+}
+
+.detalhes-grid div {
+    font-size: 18px;
+    color: #333;
+}
+/* titulos dos detalhes */
+.detalhes-grid strong {
+    font-weight: 600;
+    color: #444;
+    margin-right: 5px;
+}
+
+/* ================= DESCRIÇÃO ================= */
+pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* ================= BOTÕES================= */
+#detalhesAuditoriaContent button {
+    display: block;
+    margin: 30px auto 0 auto;
+    padding: 10px 35px;
+    background-color: #03045e;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+    /* ao passar o mouse por cima do botão */
+    #detalhesAuditoriaContent button:hover {
+        background-color: #111b29;
+    }
+
+/* ================= FORMULÁRIO DE EDIÇÃO ================= */
+#formEditarAuditoria input,
+#formEditarAuditoria select,
+#formEditarAuditoria textarea {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.2s;
+}
+
+#formEditarAuditoria input:focus,
+#formEditarAuditoria select:focus,
+#formEditarAuditoria textarea:focus {
+    outline: none;
+    border-color: #03045e;
+    background-color: #fff;
+}
+
+/* === Campo de Materiais === */
+.materiais-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.materiais-wrapper input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.materiais-wrapper input:focus {
+    outline: none;
+}
+
+.materiais-seta {
+    font-size: 1.2rem;
+    color: #555;
+    pointer-events: none;
+}
+
+.materiais-lista {
+    position: relative;
+    margin-top: 4px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.selected-materiais-tags {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.selected-item {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 13px;
+}
+
+.remove-material {
+    margin-left: 6px;
+    color: #dc3545;
+    cursor: pointer;
+}
+.checkbox-grid label span {
+    transform: translateY(4px);
+}
+
+/* Perito */

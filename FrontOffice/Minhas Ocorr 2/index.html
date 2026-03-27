@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>EyesEveryWhere </title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="../imagens/minilogo.png">
+</head>
+<body>
+
+  <!-- Fundo com cards de ocorrência -->
+  <div class="ocorrencias-fundo">
+    <img src="Passeio.png" class="card-fundo" alt="Ocorrência">
+    <img src="Passeio.png" class="card-fundo" alt="Ocorrência">
+    <img src="Passeio.png" class="card-fundo" alt="Ocorrência">
+    <img src="Passeio.png" class="card-fundo" alt="Ocorrência">
+    <img src="Passeio.png" class="card-fundo" alt="Ocorrência">
+    <img src="Passeio.png" class="card-fundo" alt="Ocorrência">
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="container">
+    <header>
+      <button class="voltar" onclick="history.back()">←</button>
+      <h1>Minhas Ocorrências</h1>
+      <div class="logo">
+        <img src="logo.png" alt="Logo">
+      </div>
+    </header>
+
+    <main class="painel-detalhes">
+      <div class="painel-esquerda">
+        <button class="fechar" onclick="history.back()">×</button>
+        <h2>Detalhes da Ocorrência</h2>
+        <div class="subtitulo" id="tipo-ocorrencia"></div>
+
+        <div class="info-bloco">
+          <h3>Localização</h3>
+          <p><span class="icone">📍</span> <span id="morada"></span><span id="codigo-postal" class="cod-postal"></span></p>
+        </div>
+
+        <div class="info-bloco">
+          <h3>Denunciante</h3>
+          <p><span class="icone">📧</span> <span id="email"></span></p>
+        </div>
+
+        <div class="info-bloco">
+          <h3>Descrição</h3>
+          <p><span class="icone">📝</span> <span id="descricao"></span></p>
+        </div>
+
+        <div class="status" id="estado"></div>
+      </div>
+
+      <div class="painel-direita">
+        <div id="map" class="mapa"></div>
+        <h4>Registos pelo denunciante</h4>
+        <div class="dupla-imagem" id="galeria-imagens"></div>
+      </div>
+    </main>
+
+  
+  </div>
+
+  <!-- Script para preencher os dados dinamicamente -->
+  <script src="script.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCy1ldhr7kUyjyPpgnXcWUQFynuIl-OMUg&libraries=places&callback=initMap" async defer></script>
+</body>
+</html>

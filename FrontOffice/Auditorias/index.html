@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EyesEveryWhere</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="../imagens/minilogo.png">
+</head>
+<body>
+<!-- Cabeçalho -->
+  <div class="menu-toggle">☰</div>
+
+  <div class="navbar-grid">
+    <div class="nav-item"><a href="#sobre-nos">SOBRE NÓS</a></div>
+    <div class="nav-item"><a href="#area-atuacao">ÁREAS DE ATUAÇÃO</a></div>
+
+    <div class="logo" id="logoLink">
+      <img src="../imagens/logo.png" alt="Logo" />
+    </div>
+
+    <div class="nav-item"><a href="#contanct">CONTACTE-NOS</a></div>
+
+    <div class="auth-buttons" id="loginContainer">
+      <a href="../../BackOffice/Login/LoginEyesEverywhere.html">
+        <button class="btn btn-login">Login</button>
+      </a>
+    </div>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <h2 class="sidebar-title">EyesEveryWhere</h2>
+      <ul class="sidebar-list">
+        <li>
+          <a href="../Auditorias/index.html" class="sidebar-link">
+            <span class="icon">🏠</span>
+            <span class="label">Início</span>
+          </a>
+        </li>
+        <li>
+          <a href="../Tipo de Ocorr/" class="sidebar-link">
+            <span class="icon">✏️</span>
+            <span class="label">Criar ocorrência</span>
+          </a>
+        </li>
+        <li>
+          <a href="../Minhas Ocorr 1/Index.html" class="sidebar-link">
+            <span class="icon">✏️</span>
+            <span class="label">Minhas Ocorrências</span>
+          </a>
+        </li>
+        <li>
+          <a href="../Ocorrências Pub. 1 inc/Index.html" class="sidebar-link">
+            <span class="icon">✏️</span>
+            <span class="label">Ver Ocorrências</span>
+          </a>
+        </li>
+        <li>
+          <a href="../../Backoffice/Auditoria/HistoricoAuditorias/historicoAuditorias.html" class="sidebar-link">
+            <span class="icon">📊</span>
+            <span class="label">Histórico de Auditorias</span>
+          </a>
+        </li>
+        <li><span class="icon">💬</span><span class="label">Notificações</span><span class="badge">1</span></li>
+      </ul>
+    </div>
+    <div class="sidebar-bottom">
+      <button class="btn-logout" id="logoutButton"><span class="icon">🔒</span><span class="label">Logout</span></button>
+    </div>
+  </div>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="title">
+        <span class="eyes">Eyes</span><span class="everywhere">EveryWhere</span>
+      </h1>
+      <p class="description">Visão em todos os cantos de Braga</p>
+      <p class="hero-subtitle">Junte-se a nós e contribua para um país mais seguro e eficiente!</p>
+    </div>
+    <button class="saber-mais">Saber Mais</button>
+  </section>
+
+  <!-- Áreas de Atuação -->
+  <section id="area-atuacao" class="area-atuacao">
+    <h1>Áreas de Atuação</h1>
+    <div class="cards-container">
+      <div class="card">
+        <img src="../imagens/area_atuacao1.png" alt="Infraestruturas e Vias Públicas">
+        <div class="card-content">
+          <h2>Infraestruturas e Vias Públicas</h2>
+          <p>Passeios Danificados<br>Falta de sinalização<br>Buracos na Estrada<br>Iluminação Pública</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <img src="../imagens/area_atuacao2.png" alt="Monotorização e Gestão de Ocorrências">
+        <div class="card-content">
+          <h2>Monitorização e Gestão de Ocorrências</h2>
+          <p>Identificação e acompanhamento de problemas urbanos relatados</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <img src="../imagens/area_atuacao3.png" alt="Auditorias e Inspeções Técnicas">
+        <div class="card-content">
+          <h2>Auditorias e Inspeções Técnicas</h2>
+          <p>Avaliação da qualidade das infraestruturas e recomendação de ações corretivas</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Imagem do Capacete -->
+    <section class="imagem-secundaria">
+      <img src="../imagens/capacete.png" alt="Capacete">
+    </section>
+
+  <!-- Sobre Nós -->
+ <section id="sobre-nos">
+  <div class="conteudo">
+    <div class="titulo">Profissionalismo e Responsabilidade!</div>
+    <div class="content-container">
+      <div class="box-sobre texto-box">
+        <h2>SOBRE NÓS</h2>
+        <p>Monitorização de todas as vias públicas e infraestruturas através de todos os cidadãos e trabalhadores.</p>
+        <button class="btn">Ver Mais</button>
+      </div>
+      <div class="box-sobre image-box">
+        <img src="../imagens/sobrenos.png" alt="Sobre Nós" />
+      </div>
+    </div>
+    <!-- Estatísticas -->
+    <div class="stats-section">
+      <div class="stat">
+        <div class="value">20</div>
+        <div class="label">Auditorias Realizadas</div>
+      </div>
+      <div class="stat">
+        <div class="value">+50</div>
+        <div class="label">Profissionais</div>
+      </div>
+      <div class="stat">
+        <div class="value">30 Minutos</div>
+        <div class="label">Tempo médio de Resposta</div>
+      </div>
+      <div class="stat">
+        <div class="value">9.5/10</div>
+        <div class="label">Média de Satisfação</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Clientes -->
+  <section class="clientes">
+    <img src="../imagens/Clients.png" alt="Clientes">
+  </section>
+
+  <!-- Contacto -->
+  <section id="contanct" class="contacto">
+    <div class="contacto-container">
+      <div class="formulario">
+        <h2>Entre em <span class="azul">Contacto</span></h2>
+        <p>Comunique qualquer mensagem.</p>
+        <p class="opcional">Preencha os dados de forma opcional.</p>
+        <form>
+          <input type="text" placeholder="Nome">
+          <input type="email" placeholder="Email">
+          <input type="tel" placeholder="Nº telemóvel">
+          <textarea placeholder="Mensagem"></textarea>
+          <button type="submit">Submeter</button>
+        </form>
+      </div>
+      <div class="mapa">
+        <img src="../imagens/Basemap image.png" alt="Mapa">
+      </div>
+    </div>
+
+    <div class="dados-empresa">
+      <div class="info-box">
+        <img src="../imagens/phoneicon.png" alt="Telefone" />
+        <p><strong>Número de Telemóvel</strong></p>
+      </div>
+      <div class="info-box">
+        <img src="../imagens/localizacaoicon.png" alt="Morada" />
+        <p><strong>Morada</strong></p>
+      </div>
+      <div class="info-box">
+        <img src="../imagens/emailicon.png" alt="Email" />
+        <p><strong>Email</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locais-Cobertos -->
+  <section class="locais-cobertos">
+    <div class="locais-container">
+      <div class="texto-locais">
+        <div class="titulo-decorado">
+          <h2>"Locais Cobertos"</h2>
+          <div class="linha-decorativa">
+            <span class="estrela">✦</span>
+          </div>
+        </div>
+        <p>Atuamos em todo o território do <strong>concelho de Braga</strong>, desde as pequenas aldeias até à grande Cidade</p>
+      </div>
+      <div class="imagem-locais">
+        <img src="../imagens/braga.jpg" alt="Mapa de Braga" />
+      </div>
+    </div>
+  </section>
+  
+  
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>EyesEveryWhere</h4>
+        <p>EyesEveryWhere é responsável pela <strong>monitorização e gestão</strong> de infraestruturas e vias públicas.</p>
+        <p>Ajudamos a reportar e acompanhar ocorrências, coordenar intervenções e melhorar a qualidade e eficiência dos espaços urbanos.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Ocorrências</h4>
+        <ul>
+          <li><a href="../Tipo de Ocorr/index.html">→ Nova Ocorrência</a></li>
+          <li><a href="../Minhas Ocorr 1/Index.html">→ Minhas Ocorrências</a></li>
+          <li><a href="../Ocorrências Pub. 1 inc/Index.html">→ Ver Ocorrências </a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#">→ Term Of Services</a></li>
+          <li><a href="#">→ Privacy Policy</a></li>
+          <li><a href="#">→ License & Regulation</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contacte-Nos</h4>
+        <ul class="contact-info">
+          <li><img src="../imagens/phoneicon.png" alt="Telefone"> +351 934 678 456</li>
+          <li><img src="../imagens/emailicon.png" alt="Email"> eyeseverywhere@gmail.com</li>
+          <li><img src="../imagens/net.png" alt="Website"> eyeseverywhere.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Botões de Login no Rodapé -->
+    <div class="footer-login">
+      <button class="login-btn">Login</button>
+    </div>
+
+    <!-- Base do rodapé -->
+    <div class="footer-bottom">
+      <p>© 2024 All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="#">Term Of Service</a>
+        <a href="#">Policy Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal-Sobre-Nós -->
+  <div id="sobreNosModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <h2>Sobre Nós</h2>
+      <p>A EyesEveryWhere é uma empresa dedicada à monitorização e manutenção de infraestruturas públicas no concelho de Braga. A nossa missão é garantir a segurança e qualidade das vias públicas através de um sistema integrado de gestão de ocorrências.</p>
+      <p>Trabalhamos em estreita colaboração com o município e com os cidadãos para identificar, reportar e resolver problemas em tempo hábil. A nossa equipa de profissionais qualificados está comprometida em melhorar a qualidade de vida dos habitantes do nosso concelho.</p>
+    </div>
+  </div>
+
+  <!-- Modais-para-Áreas-de-Atuação -->
+  <div id="modalInfraestruturas" class="modal">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <h2>Infraestruturas e Vias Públicas</h2>
+      <p>Gerimos e monitoramos diversos tipos de infraestruturas:</p>
+      <ul>
+        <li>Manutenção de vias públicas</li>
+        <li>Reparação de passeios</li>
+        <li>Sinalização rodoviária</li>
+        <li>Iluminação pública</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modalMonitorizacao" class="modal">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <h2>Monitorização e Gestão</h2>
+      <p>Nossa plataforma oferece:</p>
+      <ul>
+        <li>Acompanhamento em tempo real</li>
+        <li>Sistema de notificações</li>
+        <li>Relatórios detalhados</li>
+        <li>Histórico de intervenções</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modalAuditorias" class="modal">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <h2>Auditorias e Inspeções</h2>
+      <p>Realizamos auditorias completas:</p>
+      <ul>
+        <li>Avaliação de segurança</li>
+        <li>Verificação de conformidade</li>
+        <li>Planos de manutenção</li>
+        <li>Recomendações técnicas</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

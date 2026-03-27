@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Responsivo para móvel-->
+    <title>EyesEveryWhere</title> <!-- Título da página -->
+    <link rel="stylesheet" href="ListaAuditorias.css"> <!-- Link para o CSS -->
+    <link rel="icon" type="image/x-icon" href="minilogo.png"> <!-- Favicon -->
+</head>
+
+<body>
+    <!-- Estrutura principal -->
+    <div class="container">
+
+        <!-- Menu Lateral -->
+        <div class="sidebar">
+            <!-- Logo -->
+            <div class="logo">
+                <div>Eyes</div>
+                <div>EveryWhere</div>
+            </div>
+
+           <!-- Filtros do Menu Lateral-->
+            <nav>
+                <!-- Ordenar -->
+                <div class="menu-item">
+                    <i data-lucide="sort-asc"></i>
+                    <span>Ordenar</span>
+                </div>
+                <div class="submenu">
+                    <button class="submenu-item" data-sort="recente">
+                        <span class="dot"></span>
+                        <span>Mais Recente</span>
+                    </button>
+                    <button class="submenu-item" data-sort="antiga">
+                        <span class="dot"></span>
+                        <span>Mais Antigo</span>
+                    </button>
+                </div>
+
+                <!-- Especialidade -->
+                <div class="menu-item">
+                    <div class="menu-item-content">
+                        <i data-lucide="filter"></i>
+                        <span>Especialidade</span>
+                    </div>
+                    <!-- seta à frente -->
+                    <i data-lucide="chevron-down" class="rotate-180"></i>
+                </div>
+                <!-- Submenu da Especialidade -->
+                <div class="submenu">
+                    <button class="submenu-item" data-tipo="Buraco na Estrada"><span class="dot"></span>Buraco na Estrada</button>
+                    <button class="submenu-item" data-tipo="Passeio Danificado"><span class="dot"></span>Passeio Danificado</button>
+                    <button class="submenu-item" data-tipo="Falta de Sinalização"><span class="dot"></span>Falta de Sinalização</button>
+                    <button class="submenu-item" data-tipo="Iluminação Pública"><span class="dot"></span>Iluminação Pública</button>
+                </div>
+
+                <!-- Estado -->
+                <div class="menu-item">
+                    <div class="menu-item-content">
+                        <i data-lucide="filter"></i>
+                        <span>Estado</span>
+                    </div>
+                    <!-- seta à frente -->
+                    <i data-lucide="chevron-down" class="rotate-180"></i>
+                </div>
+
+                <!-- Submenu do Estado -->
+                <div class="submenu">
+                    <button class="submenu-item" data-estado="Concluída">
+                        <span class="dot"></span>
+                        <span>Concluída</span>
+                    </button>
+                    <button class="submenu-item" data-estado="Em Progresso">
+                        <span class="dot"></span>
+                        <span>Em Progresso</span>
+                    </button>
+                    <button class="submenu-item" data-estado="Não Iniciada">
+                        <span class="dot"></span>
+                        <span>Não Iniciada</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+
+
+        <!-- Página Principal -->
+        <div class="main-content">
+
+            <!-- Cabeçalho -->
+            <header>
+                <!-- Botão Adicionar -->
+                <div class="header-left">
+                    <button id="addAuditoriaBtn" class="btn btn-primary"> 
+                        <i data-lucide="plus"></i>
+                        <span>ADICIONAR</span>
+                    </button>
+                </div>
+
+                <!-- Centro -->
+                <div class="page-selector">
+                    <button class="page-dropdown-btn">
+                        Auditorias
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="page-dropdown-content">
+                        <a href="auditoria.html" class="active">Auditorias</a>
+                        <a href="../../Ocorrência/ocorrencia.html">Ocorrências</a>
+                        <a href="../../Peritos/peritos.html">Peritos</a>
+                        <a href="../../dashboard/dashboard.html">Dashboard</a>
+                    </div>
+                </div>
+
+                <!-- Botão Remover -->
+                <div class="header-right">
+                    <button class="btn btn-danger">
+                        <i data-lucide="minus"></i>
+                        <span>REMOVER</span>
+                    </button>
+                    <!-- LOGO -->
+                    <div class="avatar">
+                        <img src="logo.png" alt="Avatar" width="60" height="60">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Filtros -->
+            <div class="filters">
+                <input type="text" id="searchId" placeholder="ID Auditoria ...">
+                <input type="text" id="searchNomeAuditoria" placeholder="Nome Auditoria ..." />
+                <input type="date" id="searchData" placeholder="Data...">
+                <input type="text" id="searchPerito" placeholder="Nome do Perito...">
+                <!-- Botões -->
+                <button id="searchButton" class="search-icon-btn">
+                    <img src="pesquisa.png" alt="Pesquisar" />
+                  </button>
+                <button id="clearFiltersBtn" class="search-icon-btn" title="Limpar Filtros">
+                    <img src="borracha.png" alt="Limpar" />
+                </button>
+            </div>
+
+            <!-- Tabela de Auditorias -->
+            <div class="card-container">
+                <div class="table-container">
+                    <table>
+                        <!-- Cabeçalho da tabela-->
+                        <thead>
+                        <tr class="table-header">
+                            <th><input type="checkbox" class="header-checkbox"></th>
+                            <th><div class="header-cell"><span>ID</span></div></th>
+                            <th><div class="header-cell"><span>Nome Auditoria</span></div></th>
+                            <th><div class="header-cell"><span>Nível de Urgência</span></div></th>
+                            <th><div class="header-cell"><span>Tipo de Auditoria</span></div></th>
+                            <th><div class="header-cell"><span>Data de início</span></div></th>
+                            <th><div class="header-cell"><span>Perito Associado</span></div></th>
+                            <th><div class="header-cell"><span>Estado</span></div></th>
+                        </tr>
+                        </thead>
+                        <!-- corpo da tabela, preenchido automaticamente JS -->
+                        <tbody id="auditoriasTableBody"> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3 Pontos -->
+            <div id="detalhesModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>Detalhes da Auditoria</h2> <!-- Título do modal -->
+                    <div id="detalhesAuditoriaContent">
+                        <!-- Conteúdo gerado dinamicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal de alerta customizado -->
+            <div id="customAlertModal" class="modal hidden">
+                <div class="modal-content">
+                    <span id="customAlertMessage"></span>
+                    <button id="customAlertOk" class="btn btn-primary" style="margin-top: 20px;">OK</button>
+                </div>
+            </div>
+
+            <!-- Modal de confirmação de remoção -->
+            <div id="confirmRemoveModal" class="modal hidden">
+                <div class="modal-content">
+                    <span id="confirmRemoveMessage">Tem a certeza que deseja remover a(s) auditoria(s) selecionada(s)?</span>
+                    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                        <button id="confirmRemoveYes" class="btn btn-danger">Remover</button>
+                        <button id="confirmRemoveNo" class="btn btn-primary">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paginação -->
+            <div class="pagination">
+                <!-- Informação -->
+                <div class="pagination-info"> </div>
+                <!-- Controlos de página -->
+                <div class="pagination-controls">
+                    <!-- Nº de Auditorias a aparecer -->
+                    <select id="itemsPerPageSelect">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                    </select>
+                    <!-- Nº da página -->
+                    <div class="pagination-buttons">
+                        <button>&lt;</button>
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Importar icones (lucide)-->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- JavaScript -->
+    <script src="ListaAuditorias.js"></script> 
+</body>
+</html>

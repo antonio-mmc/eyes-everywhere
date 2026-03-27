@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Responsivo para móvel-->
+    <title>EyesEveryWhere</title> <!-- Título da página -->
+    <link rel="stylesheet" href="criarauditoria.css"> <!-- Link para o CSS -->
+    <link rel="icon" type="image/x-icon" href="minilogo.png"> <!-- Favicon -->
+
+</head>
+<body>
+    <!-- ---------- ESTRUTURA PRINCIPAL ---------- -->
+    <div class="container">
+
+        <!-- ----- CABEÇALHO ----- -->
+        <div class="header">
+            <button type="button" class="back-button" onclick="history.back()"> <!-- Botão de voltar -->
+                <span>←</span>
+            </button>
+            <h1>Criar novo plano de auditoria</h1> <!-- Título -->
+            <img src="logo.png" alt="Logo" class="logo"> 
+        </div>
+        
+        <!-- ----- FORMULÁRIO ----- -->
+        <form id="auditForm">
+            <div class="form-layout"> <!-- Layout em 2 colunas do formulário -->
+
+                <!-- -- Coluna da ESQUERDA -- -->
+                <div class="left-column">
+
+                    <!-- Nome Auditoria -->
+                    <div class="form-group">
+                        <label class="form-label">Nome de Auditoria</label>
+                        <div class="form-control-icon">
+                            <input type="text" class="form-control" placeholder="Insira um nome para a auditoria">
+                            <img src="auditoria.png" alt="Ícone de auditoria">
+                        </div>
+                    </div>
+
+
+                    <!-- Materiais e equipamentos -->
+                    <div class="form-group">
+                        <label class="form-label">Materiais e Equipamentos necessários</label>
+                        <div class="materials-container">
+                            <div class="materials-search">
+                                <input type="text" id="materialsSearchInput" placeholder="Buscar materiais e equipamentos" class="form-control" readonly>
+                                <img src="setabaixo.png" alt="Ícone de seta para baixo" id="materialsDropdownIcon">
+                            </div>
+                            <div class="materials-list" id="materialsList" style="display: none;">
+                                <label><input type="checkbox" name="materials" value="Lanterna"> Lanterna</label>
+                                <label><input type="checkbox" name="materials" value="Câmera fotográfica"> Câmera fotográfica</label>
+                                <label><input type="checkbox" name="materials" value="Fita sinalizadora e cones"> Fita sinalizadora e cones</label>
+                                <label><input type="checkbox" name="materials" value="Fita métrica "> Fita métrica </label>
+                                <label><input type="checkbox" name="materials" value="Luvas de proteção"> Luvas de proteção</label>
+                                <label><input type="checkbox" name="materials" value="Capacete de segurança"> Capacete de segurança</label>
+                                <label><input type="checkbox" name="materials" value="Canetas e marcadores"> Canetas e marcadores</label>
+                                <label><input type="checkbox" name="materials" value="Colete reflexor"> Colete reflexor</label>
+                                <label><input type="checkbox" name="materials" value="Tablet"> Tablet ou notebook</label>
+                                <label><input type="checkbox" name="materials" value="Drone "> Drone </label>
+                            </div>
+                            <div class="selected-materials" id="selectedMaterials"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Descrição -->
+                    <div class="form-group">
+                        <label class="form-label">Descrição</label>
+                        <div class="form-control-icon description-container">
+                            <textarea class="form-control description-area" placeholder="Descreva os objetivos e procedimentos da auditoria..."></textarea>
+                            <img src="descrição.png" alt="Ícone de descrição" class="description-icon">
+                        </div>
+                    </div>
+
+                    <!-- Nível de Urgência -->
+                    <div class="urgency-rating">
+                        <label class="urgency-title">Nível de Urgência</label>
+                        <div class="urgency-options">
+                            <input type="radio" name="urgency" id="urgency1" value="1">
+                            <label for="urgency1">1</label>
+                            <input type="radio" name="urgency" id="urgency2" value="2">
+                            <label for="urgency2">2</label>
+                            <input type="radio" name="urgency" id="urgency3" value="3">
+                            <label for="urgency3">3</label>
+                            <input type="radio" name="urgency" id="urgency4" value="4">
+                            <label for="urgency4">4</label>
+                            <input type="radio" name="urgency" id="urgency5" value="5">
+                            <label for="urgency5">5</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- -- Coluna da DIREITA -- -->
+                <div class="right-column">
+
+                    <!-- Tipo de Auditoria -->
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Auditoria</label>
+                        <div class="tipo-container">
+                            <div class="tipo-select">
+                                <input type="text" id="tipoAuditoriaInput" placeholder="Selecionar tipo de auditoria" class="form-control" readonly>
+                                <img src="setabaixo.png" alt="Ícone de seta para baixo" id="tipoDropdownIcon">
+                            </div>
+                            <div class="tipo-list" id="tipoAuditoriaList" style="display: none;">
+                                <label><input type="radio" name="tipoAuditoria" value="Buraco na Estrada"> Buraco na Estrada</label>
+                                <label><input type="radio" name="tipoAuditoria" value="Passeio Danificado"> Passeio Danificado</label>
+                                <label><input type="radio" name="tipoAuditoria" value="Falta de Sinalização"> Falta de Sinalização</label>
+                                <label><input type="radio" name="tipoAuditoria" value="Iluminação Pública"> Iluminação Pública</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Duração Estimada -->
+                    <div class="form-group">
+                        <label class="form-label">Duração Estimada</label>
+                        <div class="form-control-icon">
+                            <input type="text" class="form-control" placeholder="MM:DD:HH" id="durationInput" readonly>
+                            <img src="clock.png" alt="Ícone de relógio" id="timePickerIcon">
+                        </div>
+                        <!-- Componente Time Picker -->
+                        <div class="time-picker-container" id="timePicker">
+                            <div class="time-picker-header">
+                                <span class="time-picker-title">Selecionar Duração</span>
+                                <span class="time-picker-close" id="timePickerClose">&times;</span>
+                            </div>
+                            <div class="time-picker-content">
+                                <div class="time-unit">
+                                    <div class="time-up" id="mesesUp">▲</div>
+                                    <div class="time-value" id="mesesValue">00</div>
+                                    <div class="time-down" id="mesesDown">▼</div>
+                                    <div class="time-label">Meses</div>
+                                </div>
+                                <div class="time-separator">:</div>
+                                <div class="time-unit">
+                                    <div class="time-up" id="diasUp">▲</div>
+                                    <div class="time-value" id="diasValue">00</div>
+                                    <div class="time-down" id="diasDown">▼</div>
+                                    <div class="time-label">Dias</div>
+                                </div>
+                                <div class="time-separator">:</div>
+                                <div class="time-unit">
+                                    <div class="time-up" id="horasUp">▲</div>
+                                    <div class="time-value" id="horasValue">00</div>
+                                    <div class="time-down" id="horasDown">▼</div>
+                                    <div class="time-label">Horas</div>
+                                </div>
+                            </div>
+                            <div class="time-picker-buttons">
+                                <button type="button" class="time-picker-apply" id="timePickerApply">Aplicar</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Data de Criação -->
+                    <div class="form-group">
+                        <label class="form-label">Data de início da Auditoria</label>
+                        <div class="form-control-icon">
+                            <input type="text" class="form-control" placeholder="DD/MM/YYYY" id="dateInput" readonly>
+                            <img src="calendario.png" alt="Ícone de data" id="calendarIcon">
+                        </div>
+                        <div class="calendar-container" id="calendar">
+                            <div class="calendar-header">
+                                <div class="calendar-title">
+                                    <div class="calendar-nav">
+                                        <button type="button" class="calendar-nav-btn" id="prevMonth">&lt;</button>
+                                        <span class="calendar-month-label" id="monthYearLabel">Abril 2025</span>
+                                        <button type="button" class="calendar-nav-btn" id="nextMonth">&gt;</button>
+                                    </div>
+                                </div>
+                                <span class="calendar-close" id="calendarClose">&times;</span>
+                            </div>
+                            <div class="calendar-weekdays" id="calendarWeekdays">
+                                <div class="calendar-weekday">Dom</div>
+                                <div class="calendar-weekday">Seg</div>
+                                <div class="calendar-weekday">Ter</div>
+                                <div class="calendar-weekday">Qua</div>
+                                <div class="calendar-weekday">Qui</div>
+                                <div class="calendar-weekday">Sex</div>
+                                <div class="calendar-weekday">Sáb</div>
+                            </div>
+                            <div class="calendar-days" id="calendarDays">
+                                <!-- Dias serão gerados via JavaScript -->
+                            </div>
+                            <div class="calendar-footer">
+                                <button type="button" class="calendar-today-btn" id="todayBtn">Hoje</button>
+                                <div class="year-selector">
+                                    <button type="button" class="calendar-nav-btn" id="prevYear">&lt;</button>
+                                    <input type="number" id="yearInput" class="year-input" min="2000" max="2100" value="2025">
+                                    <button type="button" class="calendar-nav-btn" id="nextYear">&gt;</button>
+                                </div>
+                                <button type="button" class="calendar-apply-btn" id="calendarApply">Aplicar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Morada -->
+                    <div class="form-group">
+                        <label class="form-label" for="inputMorada">Morada</label>
+                        <div class="form-control-icon">
+                            <input id="inputMorada" type="text" class="form-control" placeholder="Insira morada">
+                            <img src="localização.png" alt="Ícone de morada">
+                        </div>
+                    </div>
+                    
+                      
+                    <!-- Peritos -->
+                    <div class="form-group">
+                        <label class="form-label">Peritos</label>
+                        <div class="peritos-container">
+                            <button type="button" class="peritos-button" id="openPeritosModal">
+                                Selecionar Peritos <img src="lupa.png" alt="Ícone de dropdown">
+                            </button>
+                            <div class="selected-peritos" id="selectedPeritos"></div>
+                        </div>
+                    </div>
+
+                    <!-- Modal de peritos -->
+                    <div class="peritos-modal" id="peritosModal">
+                        <div class="peritos-modal-content">
+                            <div class="peritos-modal-header">
+                                <h3>Selecionar Peritos</h3>
+                                <span class="close-modal" id="closePeritosModal">&times;</span>
+                            </div>
+                            <div class="peritos-search-container">
+                                <input type="text" id="peritosSearchInput" placeholder="Encontrar peritos..." class="form-control">
+                                <img src="lupa.png" alt="Ícone de busca">
+                            </div>
+                            <div class="peritos-list" id="peritosListContainer">
+                                <!-- Os peritos serão carregados dinamicamente aqui -->
+                            </div>
+                            <div class="peritos-modal-footer">
+                                <button type="button" class="apply-peritos-btn" id="applyPeritosSelection">Confirmar Seleção</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="criar-container">
+                        <div class="id-container">
+                            <label class="id-title">ID Auditoria</label>
+                            <div class="id-bubble" id="auditIdDisplay">1</div>
+                        </div>
+                        <button type="submit" class="criar-btn">Criar</button>
+                    </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="criarauditoria.js"></script>
+</body>
+</html>
