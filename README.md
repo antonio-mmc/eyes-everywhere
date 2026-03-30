@@ -99,4 +99,3 @@ It also includes a dedicated **BackOffice** for technical audits, inspections, a
 
 ---
 
-Created with ❤️ by **[Your Name/Group G304]** as a university project.
