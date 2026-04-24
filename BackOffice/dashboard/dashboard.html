@@ -13,13 +13,51 @@
     <!-- Estrutura principal -->
     <div class="container">
 
+        <!-- Menu Lateral -->
+        <div class="sidebar">
+            <!-- Logo -->
+            <div class="logo">
+                <div>Eyes</div>
+                <div>EveryWhere</div>
+            </div>
+
+            <!-- Filtros do Menu Lateral (Apenas Decorativo no Dashboard) -->
+            <nav>
+                <div class="menu-item active" onclick="window.location.href='dashboard.html'">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='../Ocorrência/ocorrencia.html'">
+                    <i data-lucide="file-text"></i>
+                    <span>Ocorrências</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='../Peritos/peritos.html'">
+                    <i data-lucide="users"></i>
+                    <span>Peritos</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='../Auditoria/ListaAuditorias/ListaAuditorias.html'">
+                    <i data-lucide="clipboard-check"></i>
+                    <span>Auditorias</span>
+                </div>
+            </nav>
+
+            <!-- Logout Section -->
+            <div class="logout-container">
+                <div class="logout-item" id="logoutBtn">
+                    <i data-lucide="log-out"></i>
+                    <span>Sair</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Página Principal -->
         <div class="main-content">
 
             <!-- Cabeçalho -->
             <header>
-            <div class="header-right">
-            </div>
+                <!-- Esquerda -->
+                <div class="header-left">
+                </div>
                 <!-- Centro -->
                 <div class="page-selector">
                     <button class="page-dropdown-btn">
@@ -46,8 +84,8 @@
 
             <!-- Dashboard Cards -->
              <div class="dashboard-grid">
-            <!-- ocorrencias realizadas por área -->
-            <div class="card">
+            <!-- Ocorrências Criadas por Área -->
+            <div class="card centered-content">
                 <div class="card-header">
                     <div class="card-title">Ocorrências criadas por área</div>
                 </div>
@@ -66,13 +104,13 @@
                     </div>
                     <div class="area-item bottom-right">
                         <span class="area-label">Iluminação Pública</span>
-                        <span class="area-value" style="color: #e0e6ff;">28%</span>
+                        <span class="area-value" style="color: #e0e6ff;">21%</span>
                     </div>
                 </div>
             </div>
             
             <!-- Profissionais Disponíveis -->
-            <div class="card">
+            <div class="card centered-content">
                 <div class="metric-card">
                     <div class="metric-icon" style="background-color: #f0f4ff;">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +137,7 @@
             
   
             <!-- Profissionais em Ação -->
-            <div class="card">
+            <div class="card centered-content">
                 <div class="metric-card">
                     <div class="metric-icon" style="background-color: #f0f4ff;">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +153,7 @@
             </div>
             
             <!-- Auditorias Aceites -->
-            <div class="card">
+            <div class="card centered-content">
                 <div class="metric-card">
                     <div class="metric-icon" style="background-color: #f0f4ff;">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,7 +167,7 @@
             </div>
             
             <!-- Ocorrências em Espera -->
-            <div class="card">
+            <div class="card centered-content">
                 <div class="metric-card">
                     <div class="metric-icon" style="background-color: #f0f4ff;">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,6 +184,7 @@
     <!-- Importar icones (lucide)-->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script> lucide.createIcons(); </script>
+    <script src="/FrontOffice/mockDataSeeder.js"></script>
     <script src="dashboard.js"></script>
 </body>
 </html>

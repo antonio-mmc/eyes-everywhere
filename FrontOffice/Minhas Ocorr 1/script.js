@@ -1,20 +1,23 @@
 const container = document.getElementById('lista-ocorrencias');
-const ocorrencias = JSON.parse(localStorage.getItem('ocorrencias')) || [];
+// Removida a leitura estática no topo para evitar dados obsoletos
 const ocorrenciasPorPagina = 6;
 let paginaAtual = 1;
 
 function mostrarOcorrencias(pagina) {
+  const ocorrencias = JSON.parse(localStorage.getItem('ocorrencias')) || [];
   container.innerHTML = '';
   const inicio = (pagina - 1) * ocorrenciasPorPagina;
   const fim = inicio + ocorrenciasPorPagina;
 
-  let user = localStorage.getItem('userfront');
+  let user = sessionStorage.getItem('userfront');
   if (user) {
     user = JSON.parse(user);
   }
   
-  // Filtrar apenas as ocorrências do usuário atual
-  const minhasOcorrencias = ocorrencias.filter(ocorrencia => ocorrencia.userid === user.id);
+  // Filtrar e ordenar apenas as ocorrências do usuário atual (mais recentes primeiro)
+  const minhasOcorrencias = ocorrencias
+    .filter(ocorrencia => ocorrencia.userid === user.id)
+    .sort((a, b) => b.id - a.id);
   console.log(minhasOcorrencias);
   const paginaOcorrencias = minhasOcorrencias.slice(inicio, fim);
 
@@ -65,7 +68,12 @@ function verOcorrencia(id) {
 }
 
 function construirPaginacao() {
-  const totalPaginas = Math.ceil(ocorrencias.length / ocorrenciasPorPagina);
+  const ocorrencias = JSON.parse(localStorage.getItem('ocorrencias')) || [];
+  let user = JSON.parse(sessionStorage.getItem('userfront') || '{}');
+  const minhasOcorrencias = ocorrencias
+    .filter(ocorrencia => ocorrencia.userid === user.id)
+    .sort((a, b) => b.id - a.id);
+  const totalPaginas = Math.ceil(minhasOcorrencias.length / ocorrenciasPorPagina) || 1;
   const footer = document.querySelector('.paginacao');
   footer.innerHTML = '';
 

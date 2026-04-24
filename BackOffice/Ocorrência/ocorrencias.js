@@ -33,7 +33,7 @@ let sortOrder = 'recente'; // filtro de ordenação
 let filtroId = null; // id da ocorrencia
 let filtroEmailUsuario = null; // nome da ocorrencia
 let filtroData = null; // data de criação
-let filtroMorada = null; 
+let filtroMorada = null;
 
 // =========================================================================
 // ============================ FUNCIONALIDADES ============================
@@ -71,7 +71,7 @@ function setupRemoveButton() {
             localStorage.setItem('ocorrencias', JSON.stringify(occurrencesData));
             document.querySelector('.header-checkbox').checked = false; // desmarca os checkboxs
             // atualiza a tabela e a paginação
-            atualizarTabelaOcorrencias(); 
+            atualizarTabelaOcorrencias();
             updatePagination();
         }
     });
@@ -83,7 +83,7 @@ function setupRemoveButton() {
 // ---------------------- MENU LATERAL ----------------------
 // + RECENTE / ANTIGA
 function ordenarPorData(criterio) {
-    if (sortOrder === criterio) return; 
+    if (sortOrder === criterio) return;
     sortOrder = criterio;
     currentPage = 1;
     atualizarTabelaOcorrencias();
@@ -126,17 +126,17 @@ function filtrarOcorrencias() {
     }
     // TIPO 
     if (currentTipoFiltro.length > 0) {
-        filtradas  = filtradas .filter(a => currentTipoFiltro.includes(a.tipo));
+        filtradas = filtradas.filter(a => currentTipoFiltro.includes(a.tipo));
     }
     // EMAIL DO USUÁRIO
     if (filtroEmailUsuario) {
-        filtradas = filtradas.filter(a =>   
+        filtradas = filtradas.filter(a =>
             a.email?.toLowerCase().includes(filtroEmailUsuario)
         );
     }
     // ESTADO
     if (currentEstadoFiltro.length > 0) {
-        filtradas  = filtradas .filter(a => currentEstadoFiltro.includes(a.estado));
+        filtradas = filtradas.filter(a => currentEstadoFiltro.includes(a.estado));
     }
     // DATA
     if (filtroData) {
@@ -152,8 +152,8 @@ function filtrarOcorrencias() {
         const dataB = parsePtDate(b.data);
         return sortOrder === 'recente' ? dataB - dataA : dataA - dataB;
     });
-    
-    return filtradas; 
+
+    return filtradas;
 }
 
 // ---------------------- LIMPAR FILTROS ----------------------
@@ -170,7 +170,7 @@ function limparFiltros() {
     filtroData = null;
     currentTipoFiltro = [];
     currentEstadoFiltro = [];
-    sortOrder = 'recente'; 
+    sortOrder = 'recente';
 
     // Remover botões ativos do menu lateral
     document.querySelectorAll('[data-tipo], [data-estado], [data-sort]').forEach(btn => {
@@ -213,9 +213,9 @@ function atualizarTabelaOcorrencias() {
                     <div class="user-email">${occ.email || 'N/A'}</div>
                 </div>
             </td>
-            <td>${occ.data}</td>
+            <td>${formatDateDisplay(occ.data)}</td>
             <td>${occ.tipo || 'N/A'}</td>
-            <td><span class="status-badge ${getEstadoBadgeClass(occ.estado)}">${occ.estado}</span></td>
+            <td><span class="status-badge ${getEstadoBadgeClass(occ.estado)}">${occ.estado || 'Em espera'}</span></td>
             <td>
                 <button class="btn-icon details-btn" data-id="${occ.id}">
                     <i data-lucide="more-vertical"></i>
@@ -259,9 +259,9 @@ function updatePagination() {
 
     const start = (currentPage - 1) * itemsPerPage + 1; // primeiro item da página
     const end = Math.min(currentPage * itemsPerPage, totalOccurrences); // último item da página
-    
+
     // Atualiza a informação de paginação
-     document.querySelector('.pagination-info').textContent = 
+    document.querySelector('.pagination-info').textContent =
         `Mostrando ${start} - ${end} de ${totalOccurrences} ocorrências registradas`;
 
     // botões de paginação
@@ -272,7 +272,7 @@ function updatePagination() {
         ${getPaginationButtons(currentPage, totalPages)}
         <button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">&gt;</button>
     `;
-     // Update items per page select
+    // Update items per page select
     const select = document.querySelector('.pagination-controls select');
     select.value = itemsPerPage;
 }
@@ -281,7 +281,7 @@ function updatePagination() {
 function getPaginationButtons(current, total) {
     let buttons = '';
     // botão para cada pagina, pagina atual = active
-     for (let i = 1; i <= total; i++) {
+    for (let i = 1; i <= total; i++) {
         if (i === current) {
             buttons += `<button class="active">${i}</button>`;
         } else {
@@ -294,7 +294,7 @@ function getPaginationButtons(current, total) {
 // Mudar de página
 function changePage(page) {
     currentPage = page; // atualiza a página atual
-    atualizarTabelaOcorrencias(); 
+    atualizarTabelaOcorrencias();
     updatePagination();
 }
 
@@ -317,7 +317,7 @@ function preencherFormularioComOcorrencia(id) {
     document.getElementById('morada').value = ocorrencia.morada || '';
     document.getElementById('tipo-ocorrencia').value = ocorrencia.tipo || '';
 
-   // Exibir imagens, se existirem
+    // Exibir imagens, se existirem
     const imagensContainer = document.getElementById('imagens-container');
     imagensContainer.innerHTML = ''; // Limpar imagens existentes
     if (ocorrencia.imagens && ocorrencia.imagens.length > 0) {
@@ -332,14 +332,41 @@ function preencherFormularioComOcorrencia(id) {
     }
 }
 
+// Função para formatar data na exibição (evita ISO strings feias)
+function formatDateDisplay(dateStr) {
+    if (!dateStr) return "—";
+
+    // Se já estiver no formato PT (contém /), apenas retorna o que está antes da vírgula se quisermos só data
+    if (dateStr.includes('/')) {
+        return dateStr.split(',')[0].trim();
+    }
+
+    // Se for ISO ou outro formato reconhecível pelo Date
+    const d = new Date(dateStr);
+    if (!isNaN(d.getTime())) {
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
+    return dateStr;
+}
+
 // Função auxiliar para converter "19/05/2025, 17:52:07" em objeto Date
 function parsePtDate(dateStr) {
+    if (!dateStr) return new Date(0);
+
+    // Se for ISO string
+    if (dateStr.includes('T') || !dateStr.includes('/')) {
+        const d = new Date(dateStr);
+        return isNaN(d.getTime()) ? new Date(0) : d;
+    }
+
     // Divide em data e hora
     const [datePart, timePart] = dateStr.split(',');
-    if (!datePart) return new Date(0); // fallback para datas inválidas
     const [day, month, year] = datePart.trim().split('/');
     const time = timePart ? timePart.trim() : '00:00:00';
-    // Cria string ISO: "2025-05-19T17:52:07"
     return new Date(`${year}-${month}-${day}T${time}`);
 }
 
@@ -350,7 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log('Current localStorage data:', localStorage.getItem('ocorrencias'));
 
     lucide.createIcons(); // Ativa os ícones
-   // ---------- BOTÃO Remover ----------
+    // ---------- BOTÃO Remover ----------
     setupRemoveButton();
     setupHeaderCheckbox();
 
@@ -368,8 +395,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // --------- ATUALIZAR TABELA / PAGINAÇÃO ---------
     atualizarTabelaOcorrencias();
     updatePagination();
-    
-     // Atualizar itemsPerPage com base no dropdown
+
+    // Atualizar itemsPerPage com base no dropdown
     const itemsPerPageSelect = document.getElementById("itemsPerPageSelect");
     if (itemsPerPageSelect) {
         itemsPerPageSelect.value = itemsPerPage;
@@ -380,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updatePagination();
         });
     }
-    
+
     // ======================== FILTROS ========================
     // -------------------- MENU LATERAL --------------------
     // Recente
@@ -396,9 +423,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
         document.querySelector('[data-sort="antiga"]').classList.add('active');
     });
-     
+
     // Tipo de Ocorrencia
-   document.querySelectorAll('.submenu-item[data-tipo]').forEach(btn => {
+    document.querySelectorAll('.submenu-item[data-tipo]').forEach(btn => {
         btn.addEventListener('click', () => {
             const tipo = btn.getAttribute('data-tipo');
             filterByTipoOcorrencia(tipo);
@@ -413,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Estado da Ocorrencia
-   document.querySelectorAll('.submenu-item[data-estado]').forEach(btn => {
+    document.querySelectorAll('.submenu-item[data-estado]').forEach(btn => {
         btn.addEventListener('click', () => {
             const estado = btn.getAttribute('data-estado');
             filterByEstado(estado);
@@ -448,4 +475,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     // Limpar filtros
     document.getElementById('clearFiltersBtn').addEventListener('click', limparFiltros);
+
+    // Logout Logic
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('islogged');
+            sessionStorage.removeItem('userfront');
+            window.location.href = '../../FrontOffice/Auditorias/index.html';
+        });
+    }
 });

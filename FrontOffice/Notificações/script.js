@@ -68,49 +68,44 @@ function verOcorrencia(id) {
 
   if (!ocorrencia) return;
 
-  // Cria o conteúdo do popup
   const motivo = ocorrencia.motivoRejeicao ? ocorrencia.motivoRejeicao : "Sem motivo registado";
   const popup = document.createElement('div');
-  popup.className = 'popup-ocorrencia';
+  popup.className = 'popup-overlay';
   popup.innerHTML = `
-    <div class="popup-content">
-      <span class="close-popup" style="float:right;cursor:pointer;font-size:1.5rem;">&times;</span>
-      <h2>${ocorrencia.tipo}</h2>
-      <p><strong>Descrição:</strong> ${ocorrencia.descricao}</p>
-      <p><strong>Motivo Rejeição:</strong> ${motivo}</p>
-      <img src="${(ocorrencia.imagens && ocorrencia.imagens[0]) ? ocorrencia.imagens[0] : 'placeholder.png'}" alt="Imagem da ocorrência" style="max-width:100%;margin-top:10px;">
+    <div class="popup-card">
+      <button class="popup-close">&times;</button>
+      <h2>Detalhes da Ocorrência</h2>
+      
+      <div class="popup-field">
+        <strong>Tipo</strong>
+        <p>${ocorrencia.tipo}</p>
+      </div>
+
+      <div class="popup-field">
+        <strong>Descrição</strong>
+        <p>${ocorrencia.descricao}</p>
+      </div>
+
+      <div class="popup-motive">
+        <strong>Motivo da Rejeição</strong>
+        <p>${motivo}</p>
+      </div>
     </div>
   `;
 
-  // Fechar popup ao clicar no X
-  popup.querySelector('.close-popup').onclick = () => popup.remove();
-
-  // Fechar popup ao clicar fora do conteúdo
+  popup.querySelector('.popup-close').onclick = () => popup.remove();
   popup.onclick = (e) => { if (e.target === popup) popup.remove(); };
-
-  // Estilo básico para o popup (podes pôr isto no CSS)
-  popup.style.position = 'fixed';
-  popup.style.top = 0;
-  popup.style.left = 0;
-  popup.style.width = '100vw';
-  popup.style.height = '100vh';
-  popup.style.background = 'rgba(0,0,0,0.5)';
-  popup.style.display = 'flex';
-  popup.style.alignItems = 'center';
-  popup.style.justifyContent = 'center';
-  popup.style.zIndex = 9999;
-
-  popup.querySelector('.popup-content').style.background = '#fff';
-  popup.querySelector('.popup-content').style.padding = '2rem';
-  popup.querySelector('.popup-content').style.borderRadius = '10px';
-  popup.querySelector('.popup-content').style.maxWidth = '400px';
-  popup.querySelector('.popup-content').style.width = '100%';
 
   document.body.appendChild(popup);
 }
 
 function construirPaginacao() {
-  const totalPaginas = Math.ceil(ocorrencias.length / ocorrenciasPorPagina);
+  let user = JSON.parse(localStorage.getItem('userfront') || '{}');
+  const minhasOcorrencias = ocorrencias.filter(
+    ocorrencia => ocorrencia.userid === user.id && ocorrencia.estado === "Não Aceite"
+  );
+  
+  const totalPaginas = Math.ceil(minhasOcorrencias.length / ocorrenciasPorPagina) || 1;
   const footer = document.querySelector('.paginacao');
   footer.innerHTML = '';
 

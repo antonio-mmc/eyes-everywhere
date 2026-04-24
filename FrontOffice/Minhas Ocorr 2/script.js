@@ -5,9 +5,20 @@ const id = parseInt(params.get("id"));
 // Ir buscar do localStorage
 const ocorrencias = JSON.parse(localStorage.getItem("ocorrencias")) || [];
 const ocorrencia = ocorrencias.find(o => o.id === id);
-console.log(ocorrencia);
+
+// Obter utilizador logado para decidir o título
+let user = sessionStorage.getItem('userfront');
+if (user) user = JSON.parse(user);
 
 if (ocorrencia) {
+  // Atualizar título dinamicamente
+  const tituloH1 = document.querySelector('header h1');
+  if (user && ocorrencia.userid === user.id) {
+    tituloH1.textContent = "Minhas Ocorrências";
+  } else {
+    tituloH1.textContent = "Ocorrências Públicas";
+  }
+
   // Preencher os campos
   document.getElementById("tipo-ocorrencia").textContent = ocorrencia.tipo;
   document.getElementById("morada").textContent = ocorrencia.morada + ", ";
@@ -61,12 +72,13 @@ if (ocorrencia) {
 }
 
 // Handle approve/reject buttons
-    document.querySelector('.button-green').addEventListener('click', () => {
-        // Store the current occurrence ID for use in criarauditoria.html
-        localStorage.setItem('occurrenceForAudit', occurrenceId);
-        // Redirect to criarauditoria.html
-        window.location.href = '../../Auditoria/criarauditoria.html';
-    });
+    const btnGreen = document.querySelector('.button-green');
+    if (btnGreen) {
+      btnGreen.addEventListener('click', () => {
+          localStorage.setItem('occurrenceForAudit', id);
+          window.location.href = '../../Auditoria/criarauditoria.html';
+      });
+    }
 
 // Update the status tag function
 function updateStatusTag(status) {
@@ -79,19 +91,21 @@ function updateStatusTag(status) {
 }
 
 // Atualizar o botão vermelho
-document.querySelector('.button-red').addEventListener('click', () => {
-    const occurrences = JSON.parse(localStorage.getItem('ocorrencias')) || [];
-    const index = occurrences.findIndex(o => o.id === parseInt(occurrenceId));
-    
-    if (index !== -1) {
-        occurrences[index].estado = 'Não Aceite';
-        localStorage.setItem('ocorrencias', JSON.stringify(occurrences));
-        
-        // Atualizar a tag com a nova cor
-        updateStatusTag('Não Aceite');
-        
-        setTimeout(() => {
-            history.back();
-        }, 500);
-    }
-});
+const btnRed = document.querySelector('.button-red');
+if (btnRed) {
+  btnRed.addEventListener('click', () => {
+      const occurrences = JSON.parse(localStorage.getItem('ocorrencias')) || [];
+      const index = occurrences.findIndex(o => o.id === id);
+      
+      if (index !== -1) {
+          occurrences[index].estado = 'Não Aceite';
+          localStorage.setItem('ocorrencias', JSON.stringify(occurrences));
+          
+          updateStatusTag('Não Aceite');
+          
+          setTimeout(() => {
+              history.back();
+          }, 500);
+      }
+  });
+}

@@ -26,11 +26,19 @@ if (auditoria) {
     document.getElementById("morada").value = auditoria.morada || "—";
 
     // Data de Conclusão
-    if (auditoria.dataConclusao) {
-      const [ano, mes, dia] = auditoria.dataConclusao.split("-");
-      document.getElementById("localizacao").value = `${dia}/${mes}/${ano}`;
+    const dataConclusaoRaw = auditoria.dataConclusao;
+    if (!dataConclusaoRaw) {
+        document.getElementById("localizacao").value = "—";
+    } else if (dataConclusaoRaw.includes('/')) {
+        document.getElementById("localizacao").value = dataConclusaoRaw;
     } else {
-      document.getElementById("localizacao").value = "—";
+        const partes = dataConclusaoRaw.split("-");
+        if (partes.length === 3) {
+            const [ano, mes, dia] = partes;
+            document.getElementById("localizacao").value = `${dia}/${mes}/${ano}`;
+        } else {
+            document.getElementById("localizacao").value = dataConclusaoRaw;
+        }
     }
 
     // Perito Supervisor

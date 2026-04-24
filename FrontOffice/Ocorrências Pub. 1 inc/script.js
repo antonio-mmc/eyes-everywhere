@@ -1,6 +1,7 @@
 const container = document.getElementById('lista-ocorrencias');
 const ocorrencias = JSON.parse(localStorage.getItem('ocorrencias')) || [];
-const ocorrenciasAceites = ocorrencias.filter(ocorrencia => ocorrencia.estado === "Aceite");
+const publicStatuses = ["Aceite", "Em Progresso", "Resolvido"];
+const ocorrenciasAceites = ocorrencias.filter(ocorrencia => publicStatuses.includes(ocorrencia.estado));
 const ocorrenciasPorPagina = 6;
 let paginaAtual = 1;
 
@@ -49,7 +50,7 @@ function verOcorrencia(id) {
 }
 
 function construirPaginacao() {
-  const totalPaginas = Math.ceil(ocorrencias.length / ocorrenciasPorPagina);
+  const totalPaginas = Math.ceil(ocorrenciasAceites.length / ocorrenciasPorPagina) || 1;
   const footer = document.querySelector('.paginacao');
   footer.innerHTML = '';
 

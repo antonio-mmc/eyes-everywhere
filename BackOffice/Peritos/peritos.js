@@ -13,21 +13,21 @@ function saveExpertsData(data) {
 
 // =========================== VARIÁVEIS GLOBAIS ===========================
 // =========================================================================
-    // Exemplo de peritos
-    let peritosFiltradosPesquisa = null;
-    // Paginação
-    let currentPage = 1; // Página atual 
-    let itemsPerPage = 5; // nº peritos por página
+// Exemplo de peritos
+let peritosFiltradosPesquisa = null;
+// Paginação
+let currentPage = 1; // Página atual 
+let itemsPerPage = 5; // nº peritos por página
 
-    // Menu lateral
-    let currentTipoFiltro = []; // Filtro de especialidade
-    let currentEstadoFiltro = []; // Filtro de estado do perito
-    let sortOrder = 'recente'; // filtro de ordenação
+// Menu lateral
+let currentTipoFiltro = []; // Filtro de especialidade
+let currentEstadoFiltro = []; // Filtro de estado do perito
+let sortOrder = 'recente'; // filtro de ordenação
 
-    // Pesquisa
-    let filtroPerito = null; // nome do perito
-    let filtroData = null; // data de criação
-    
+// Pesquisa
+let filtroPerito = null; // nome do perito
+let filtroData = null; // data de criação
+
 
 
 // =========================================================================
@@ -64,7 +64,7 @@ function setupRemoveButton() {
         document.getElementById('confirmRemoveModal').classList.remove('hidden');
 
         // Ao clicar em "Remover"
-        document.getElementById('confirmRemoveYes').onclick = function() {
+        document.getElementById('confirmRemoveYes').onclick = function () {
             const ids = Array.from(selected).map(c => parseInt(c.getAttribute('data-id')));
             const updated = getExpertsData().filter(expert => !ids.includes(expert.id));
             saveExpertsData(updated);
@@ -75,7 +75,7 @@ function setupRemoveButton() {
         };
 
         // Ao clicar em "Cancelar"
-        document.getElementById('confirmRemoveNo').onclick = function() {
+        document.getElementById('confirmRemoveNo').onclick = function () {
             document.getElementById('confirmRemoveModal').classList.add('hidden');
         };
     });
@@ -189,29 +189,29 @@ function editarPerito(peritoId) {
             specialty: formData.get('specialty'),
             status: formData.get('status'),
         };
-            // Atualizar perito na lista
-            peritos[peritos.findIndex(p => p.id === peritoId)] = updatedPerito;
-            saveExpertsData(peritos);
+        // Atualizar perito na lista
+        peritos[peritos.findIndex(p => p.id === peritoId)] = updatedPerito;
+        saveExpertsData(peritos);
 
-            atualizarTabelaPeritos();
-            document.getElementById('detalhesModal').classList.add('hidden');
+        atualizarTabelaPeritos();
+        document.getElementById('detalhesModal').classList.add('hidden');
     });
 }
 
-    // Formatar data para input
-    function formatarDataInput(data) {
-        if (!data) return '';
-        // Se já estiver no formato YYYY-MM-DD, retorna direto
-        if (/^\d{4}-\d{2}-\d{2}$/.test(data)) return data;
-        // Se estiver no formato DD/MM/YYYY → converte
-        if (/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
-            const [d, m, y] = data.split('/');
-            return `${y}-${m}-${d}`;
-        }
-        return ''; // formato inválido
+// Formatar data para input
+function formatarDataInput(data) {
+    if (!data) return '';
+    // Se já estiver no formato YYYY-MM-DD, retorna direto
+    if (/^\d{4}-\d{2}-\d{2}$/.test(data)) return data;
+    // Se estiver no formato DD/MM/YYYY → converte
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
+        const [d, m, y] = data.split('/');
+        return `${y}-${m}-${d}`;
     }
+    return ''; // formato inválido
+}
 
-    function formatarDataVisual(data) {
+function formatarDataVisual(data) {
     if (!data) return '';
     // Se for YYYY-MM-DD → converter para DD/MM/YYYY
     if (/^\d{4}-\d{2}-\d{2}$/.test(data)) {
@@ -230,7 +230,7 @@ function editarPerito(peritoId) {
 // ---------------------- MENU LATERAL ----------------------
 // + RECENTE / ANTIGA
 function ordenarPorData(criterio) {
-    if (sortOrder === criterio) return; 
+    if (sortOrder === criterio) return;
     sortOrder = criterio;
     currentPage = 1;
     atualizarTabelaPeritos();
@@ -268,18 +268,18 @@ function filtrarPeritos() {
     let filtradas = [...getExpertsData()];
     // TIPO 
     if (currentTipoFiltro.length > 0) {
-        filtradas  = filtradas .filter(a => currentTipoFiltro.includes(a.specialty));
+        filtradas = filtradas.filter(a => currentTipoFiltro.includes(a.specialty));
     }
     // ESTADO
     if (currentEstadoFiltro.length > 0) {
-        filtradas  = filtradas .filter(a => currentEstadoFiltro.includes(a.status));
+        filtradas = filtradas.filter(a => currentEstadoFiltro.includes(a.status));
     }
     // DATA
     if (filtroData) {
-    filtradas = filtradas.filter(a => {
-        const [d, m, y] = a.startDate.split('/');
-        return new Date(`${y}-${m}-${d}`) >= new Date(filtroData);
-    });
+        filtradas = filtradas.filter(a => {
+            const [d, m, y] = a.startDate.split('/');
+            return new Date(`${y}-${m}-${d}`) >= new Date(filtroData);
+        });
     }
     return filtradas;
 }
@@ -298,7 +298,7 @@ function limparFiltros() {
     filtroPerito = null;
     currentTipoFiltro = [];
     currentEstadoFiltro = [];
-    sortOrder = 'recente'; 
+    sortOrder = 'recente';
 
     // Remover botões ativos do menu lateral
     document.querySelectorAll('[data-tipo], [data-estado], [data-sort]').forEach(btn => {
@@ -388,7 +388,7 @@ function updatePagination(lista = null) {
 
     const start = (currentPage - 1) * itemsPerPage + 1; // primeiro item da página
     const end = Math.min(currentPage * itemsPerPage, totalItems); // último item da página
-    
+
     // Atualiza a informação de paginação
     document.querySelector('.pagination-info').textContent =
         `Mostrando ${start} - ${end} de ${totalItems} peritos registrados`;
@@ -416,7 +416,7 @@ function getPaginationButtons(current, total) {
 // Mudar de página
 function changePage(page) {
     currentPage = page; // atualiza a página atual
-    atualizarTabelaPeritos(); 
+    atualizarTabelaPeritos();
     updatePagination();
 }
 
@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ======================== FILTROS ========================
     // -------------------- MENU LATERAL --------------------
 
-     
+
     // Especialidade
     document.querySelectorAll('[data-tipo]').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -476,7 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const perito = document.getElementById('searchPerito').value.trim().toLowerCase();
         // Data
         const data = document.getElementById('searchData').value;
-        
+
 
         let filtradas = [...getExpertsData()];
 
@@ -509,6 +509,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Limpar filtros
     document.getElementById('clearFiltersBtn').addEventListener('click', limparFiltros);
 
+    // Logout Logic
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('islogged');
+            sessionStorage.removeItem('userfront');
+            window.location.href = '../../FrontOffice/Auditorias/index.html';
+        });
+    }
+
     document.querySelectorAll('.submenu-item[data-sort]').forEach(btn => {
         btn.addEventListener('click', () => {
             const criterio = btn.getAttribute('data-sort');
@@ -523,6 +533,6 @@ function showCustomAlert(message) {
     document.getElementById('customAlertMessage').textContent = message;
     document.getElementById('customAlertModal').classList.remove('hidden');
 }
-document.getElementById('customAlertOk').onclick = function() {
+document.getElementById('customAlertOk').onclick = function () {
     document.getElementById('customAlertModal').classList.add('hidden');
 };

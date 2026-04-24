@@ -1,22 +1,22 @@
-document.getElementById("googleLoginBtn").addEventListener("click", function(event) {
+document.getElementById("googleLoginBtn").addEventListener("click", function (event) {
   event.preventDefault();
-  
+
   // Parâmetros para autenticação OAuth2
   const clientId = "638875266220-lc2qlih7bdm9igt63ti78vsjfb12qiub.apps.googleusercontent.com";
-  const redirectUri = "http://localhost:3000/BackOffice/Login/LoginEyesEverywhere.html";
- // URL fixa
+  const redirectUri = `${window.location.origin}/BackOffice/Login/LoginEyesEverywhere.html`;
+  // URL fixa
   const scope = "email profile openid";
   const responseType = "token";
   const prompt = "consent"; // Adiciona prompt para sempre pedir consentimento
-  
+
   // Construa a URL de autenticação
-  const authUrl = `https://accounts.google.com/o/oauth2/auth?`+
-    `client_id=${encodeURIComponent(clientId)}&`+
-    `redirect_uri=${encodeURIComponent(redirectUri)}&`+
-    `scope=${encodeURIComponent(scope)}&`+
-    `response_type=${responseType}&`+
+  const authUrl = `https://accounts.google.com/o/oauth2/auth?` +
+    `client_id=${encodeURIComponent(clientId)}&` +
+    `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+    `scope=${encodeURIComponent(scope)}&` +
+    `response_type=${responseType}&` +
     `prompt=${prompt}`;
-  
+
   // Redirecione para a página de login do Google
   window.location.href = authUrl;
 });
@@ -25,7 +25,7 @@ document.getElementById("googleLoginBtn").addEventListener("click", function(eve
 function getHashParams() {
   const hash = window.location.hash.substr(1);
   const params = {};
-  hash.split('&').forEach(function(pair) {
+  hash.split('&').forEach(function (pair) {
     const parts = pair.split('=');
     if (parts.length === 2) {
       params[parts[0]] = decodeURIComponent(parts[1]);
@@ -62,25 +62,27 @@ async function getUserInfo(accessToken) {
 }
 
 // Verifique se estamos retornando de uma autenticação
-window.addEventListener('load', async function() {
+window.addEventListener('load', async function () {
   const params = getHashParams();
   if (params.access_token) {
     console.log("Token de acesso:", params.access_token);
-    
+
     // Obter informações do usuário
     const userInfo = await getUserInfo(params.access_token);
-    
+
     if (userInfo) {
+      console.log("Email do utilizador:", userInfo.email);
       if (isAdmin(userInfo.email)) {
+        console.log("Acesso Admin garantido.");
         // Redirecionar para página de admin
         window.location.href = '../Peritos/peritos.html';
       } else {
+        console.log("Acesso de utilizador normal.");
         // Redirecionar para página de usuário normal
-        localStorage.setItem('userfront', JSON.stringify(userInfo));
-        islogged = true;
-        localStorage.setItem('islogged', islogged);
+        sessionStorage.setItem('userfront', JSON.stringify(userInfo));
+        sessionStorage.setItem('islogged', 'true');
         window.location.href = '../../FrontOffice/Auditorias/index.html';
-       
+
       }
     }
   }

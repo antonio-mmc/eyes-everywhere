@@ -1,14 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const expertsData = JSON.parse(localStorage.getItem('expertsData') || '[]');
-    // compara sempre em minúsculas
-    const disponiveis = expertsData.filter(e => e.status && e.status.toLowerCase() === 'disponível').length;
-    const el = document.getElementById('profissionais-disponiveis');
-    if (el) el.textContent = disponiveis;
-
-    const emAuditoria = expertsData.filter(e => e.status && e.status.toLowerCase() === 'em auditoria').length;
-    const elEmAcao = document.getElementById('profissionais-em-acao');
-    if (elEmAcao) elEmAcao.textContent = emAuditoria;
-
+document.addEventListener('DOMContentLoaded', function () {
     // AUDITORIAS RESOLVIDAS COM PAGINAÇÃO
     const auditorias = JSON.parse(localStorage.getItem('auditorias') || '[]');
     const lista = document.getElementById('auditorias-resolvidas-list');
@@ -112,12 +102,53 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    const auditoriasAceites = JSON.parse(localStorage.getItem('auditorias') || '[]').length;
-    const elAuditoriasAceites = document.getElementById('auditorias-aceites');
-    if (elAuditoriasAceites) elAuditoriasAceites.textContent = auditoriasAceites;
-
-    const ocorrenciasData = JSON.parse(localStorage.getItem('ocorrencias') || '[]');
-    const ocorrenciasEmEspera = ocorrenciasData.filter(o => o.estado && o.estado.toLowerCase() === 'em espera').length;
+    // Ocorrências em Espera (Requested: 81)
     const elOcorrenciasEmEspera = document.getElementById('ocorrencias-em-espera');
-    if (elOcorrenciasEmEspera) elOcorrenciasEmEspera.textContent = ocorrenciasEmEspera;
+    if (elOcorrenciasEmEspera) elOcorrenciasEmEspera.textContent = '81';
+
+    // Auditorias Aceites (Requested: 520)
+    const elAuditoriasAceites = document.getElementById('auditorias-aceites');
+    if (elAuditoriasAceites) elAuditoriasAceites.textContent = '520';
+
+    // Real Stats for Professionals (Requested: 150 / 100)
+    const elDisponiveis = document.getElementById('profissionais-disponiveis');
+    if (elDisponiveis) elDisponiveis.textContent = '150';
+
+    const elEmAcao = document.getElementById('profissionais-em-acao');
+    if (elEmAcao) elEmAcao.textContent = '100';
+
+    // Auditorias a ser Resolvidas (Based on 'Em Progresso' + Mock for variety)
+    const auditoriasData = JSON.parse(localStorage.getItem('auditorias') || '[]');
+    let emProgresso = auditoriasData.filter(a => a.estado === 'Em Progresso');
+
+    // Se houver poucas, adicionamos umas "falsas" para preencher como solicitado
+    if (emProgresso.length < 3) {
+        emProgresso.push(
+            { nome: 'Inspeção Braga Sul', estado: 'Em Progresso' },
+            { nome: 'Vistoria Noturna', estado: 'Em Progresso' },
+            { nome: 'Acessibilidade Centro', estado: 'Em Progresso' }
+        );
+    }
+
+    const auditoriasList = document.getElementById('auditorias-resolvidas-list');
+
+    if (auditoriasList) {
+        auditoriasList.innerHTML = emProgresso.map(a => `
+            <a href="../Auditoria/ListaAuditorias/ListaAuditorias.html" class="list-item">
+                <div class="list-item-icon"><i data-lucide="clock"></i></div>
+                <div class="list-item-text">${a.nome || 'Auditoria sem nome'}</div>
+            </a>
+        `).join('');
+        lucide.createIcons();
+    }
+
+    // Logout Logic (Redirect to FrontOffice)
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('islogged');
+            sessionStorage.removeItem('userfront');
+            window.location.href = '../../FrontOffice/Auditorias/index.html';
+        });
+    }
 });

@@ -12,22 +12,22 @@ function saveAuditoriasData() {
 
 // =========================== VARIÁVEIS GLOBAIS ===========================
 // =========================================================================
-    // Exemplo de auditorias
-    let auditoriasFiltradasPesquisa = null;
-    // Paginação
-    let currentPage = 1; // Página atual 
-    let itemsPerPage = 5; // nº auditorias por página
+// Exemplo de auditorias
+let auditoriasFiltradasPesquisa = null;
+// Paginação
+let currentPage = 1; // Página atual 
+let itemsPerPage = 5; // nº auditorias por página
 
-    // Menu lateral
-    let currentTipoFiltro = []; // Filtro de tipo de auditoria
-    let currentEstadoFiltro = []; // Filtro de estado da auditoria
-    let sortOrder = 'recente'; // filtro de ordenação
+// Menu lateral
+let currentTipoFiltro = []; // Filtro de tipo de auditoria
+let currentEstadoFiltro = []; // Filtro de estado da auditoria
+let sortOrder = 'recente'; // filtro de ordenação
 
-    // Pesquisa
-    let filtroId = null; // id da auditoria
-    let filtroNomeAuditoria = null; // nome da auditoria
-    let filtroData = null; // data de inicio
-    let filtroPerito = null; // nome do perito
+// Pesquisa
+let filtroId = null; // id da auditoria
+let filtroNomeAuditoria = null; // nome da auditoria
+let filtroData = null; // data de inicio
+let filtroPerito = null; // nome do perito
 
 
 // =========================================================================
@@ -62,7 +62,7 @@ function setupRemoveButton() {
         document.getElementById('confirmRemoveModal').classList.remove('hidden');
 
         // Ao clicar em "Remover"
-        document.getElementById('confirmRemoveYes').onclick = function() {
+        document.getElementById('confirmRemoveYes').onclick = function () {
             const ids = Array.from(selected).map(c => parseInt(c.getAttribute('data-id')));
             auditoriasData = auditoriasData.filter(a => !ids.includes(parseInt(a.id)));
             saveAuditoriasData();
@@ -73,10 +73,19 @@ function setupRemoveButton() {
         };
 
         // Ao clicar em "Cancelar"
-        document.getElementById('confirmRemoveNo').onclick = function() {
+        document.getElementById('confirmRemoveNo').onclick = function () {
             document.getElementById('confirmRemoveModal').classList.add('hidden');
         };
     });
+    // Logout Logic
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('islogged');
+            sessionStorage.removeItem('userfront');
+            window.location.href = '../../../FrontOffice/Auditorias/index.html';
+        });
+    }
 }
 
 // =========================================================================
@@ -86,7 +95,7 @@ function setupRemoveButton() {
 // ---------------------- MENU LATERAL ----------------------
 // + RECENTE / ANTIGA
 function ordenarPorData(criterio) {
-    if (sortOrder === criterio) return; 
+    if (sortOrder === criterio) return;
     sortOrder = criterio;
     currentPage = 1;
     atualizarTabelaAuditorias();
@@ -138,7 +147,7 @@ function filtrarAuditorias() {
     }
     // ESTADO
     if (currentEstadoFiltro.length > 0) {
-        filtradas  = filtradas .filter(a => currentEstadoFiltro.includes(a.estado));
+        filtradas = filtradas.filter(a => currentEstadoFiltro.includes(a.estado));
     }
     // DATA
     if (filtroData) {
@@ -146,7 +155,7 @@ function filtrarAuditorias() {
         const dataFormatada = `${dia}/${mes}/${ano}`;
         filtradas = filtradas.filter(a => a.data === dataFormatada);
     }
-     // NOME DO PERITO
+    // NOME DO PERITO
     if (filtroPerito) {
         filtradas = filtradas.filter(a =>
             a.peritos?.[0]?.name?.toLowerCase().includes(filtroPerito)
@@ -171,7 +180,7 @@ function limparFiltros() {
     filtroPerito = null;
     currentTipoFiltro = [];
     currentEstadoFiltro = [];
-    sortOrder = 'recente'; 
+    sortOrder = 'recente';
 
     // Remover botões ativos do menu lateral
     document.querySelectorAll('[data-tipo], [data-estado], [data-sort]').forEach(btn => {
@@ -258,7 +267,7 @@ function abrirDetalhesAuditoria(auditoria) {
     const duracao = auditoria.duracao || "—";
     const descricao = auditoria.descricao || "—";
     const tipo = auditoria.tipoOcorrencia || auditoria.tipo || "—";
-    const dataInicio = auditoria.data ? formatarData(auditoria.data): "—";
+    const dataInicio = auditoria.data ? formatarData(auditoria.data) : "—";
     const urgencia = auditoria.nivelUrgencia || "—";
     const estado = auditoria.estado || "—";
 
@@ -294,15 +303,15 @@ function editarAuditoria(id) {
     if (!auditoria) return;
     // não editável se a auditoria já estiver concluída
     if (auditoria.estado === "Concluída") {
-        abrirDetalhesAuditoria(auditoria); 
+        abrirDetalhesAuditoria(auditoria);
         return;
     }
 
     const content = document.getElementById("detalhesAuditoriaContent");
     const [meses, dias, horas] = extrairDuracao(auditoria.duracao);
 
-// ========================== HTML DO FORMULÁRIO ==========================
-content.innerHTML = `
+    // ========================== HTML DO FORMULÁRIO ==========================
+    content.innerHTML = `
     <form id="formEditarAuditoria" class="detalhes-grid">
         <div>
             <label><strong>Nome:</strong></label>
@@ -327,10 +336,10 @@ content.innerHTML = `
                 </div>
                 <div class="checkbox-grid">
                     ${[
-                        "Lanterna", "Câmera fotográfica", "Fita sinalizadora e cones",
-                        "Fita métrica", "Luvas de proteção", "Capacete de segurança",
-                        "Caneleiras", "Bloco de notas", "Colete refletor"
-                    ].map(mat => `
+            "Lanterna", "Câmera fotográfica", "Fita sinalizadora e cones",
+            "Fita métrica", "Luvas de proteção", "Capacete de segurança",
+            "Caneleiras", "Bloco de notas", "Colete refletor"
+        ].map(mat => `
                         <label>
                             <span>${mat}</span>
                             <input type="checkbox" name="materials" value="${mat}" ${auditoria.materiais?.includes(mat) ? 'checked' : ''}>
@@ -395,9 +404,9 @@ content.innerHTML = `
     </form>
 `;
 
-// ========================== JS DO FORMULÁRIO ==========================
-const form = document.getElementById("formEditarAuditoria");
-form.style.rowGap = '30px';
+    // ========================== JS DO FORMULÁRIO ==========================
+    const form = document.getElementById("formEditarAuditoria");
+    form.style.rowGap = '30px';
 
     // ---------- MATERIAIS DROPDOWN ----------
     const materialsSearchInput = document.getElementById('materialsSearchInput');
@@ -413,7 +422,7 @@ form.style.rowGap = '30px';
     materialsSearchInput.addEventListener('click', toggleMaterialsList);
 
     // Fechar dropdown se clicar fora
-    window.addEventListener('click', function(event) {
+    window.addEventListener('click', function (event) {
         if (!event.target.closest('.materiais-wrapper') && !event.target.closest('.materiais-lista')) {
             materialsList.style.display = 'none';
         }
@@ -469,13 +478,13 @@ form.style.rowGap = '30px';
     const peritoDropdownIcon = document.getElementById('peritoDropdownIcon');
     const peritoDropdownList = document.getElementById('peritoDropdownList');
 
-   let peritoSelecionado = null;
-        const experts = JSON.parse(localStorage.getItem('expertsData')) || [];
+    let peritoSelecionado = null;
+    const experts = JSON.parse(localStorage.getItem('expertsData')) || [];
 
-        if (auditoria.peritos?.[0]) {
-            const idGuardado = auditoria.peritos[0].id;
-            peritoSelecionado = experts.find(p => p.id == idGuardado) || null;
-        }
+    if (auditoria.peritos?.[0]) {
+        const idGuardado = auditoria.peritos[0].id;
+        peritoSelecionado = experts.find(p => p.id == idGuardado) || null;
+    }
 
 
     // Mostrar lista ao clicar
@@ -486,7 +495,7 @@ form.style.rowGap = '30px';
     peritoDropdownIcon.addEventListener('click', togglePeritoDropdown);
 
     // Fechar dropdown se clicar fora
-    window.addEventListener('click', function(event) {
+    window.addEventListener('click', function (event) {
         if (!event.target.closest('#peritoDropdownWrapper') && !event.target.closest('#peritoDropdownList')) {
             peritoDropdownList.style.display = 'none';
         }
@@ -694,7 +703,7 @@ function updatePagination(lista = null) {
 
     const start = (currentPage - 1) * itemsPerPage + 1; // primeiro item da página
     const end = Math.min(currentPage * itemsPerPage, totalItems); // último item da página
-    
+
     // Atualiza a informação de paginação
     document.querySelector('.pagination-info').textContent =
         `Mostrando ${start} - ${end} de ${totalItems} auditorias registradas`;
@@ -722,7 +731,7 @@ function getPaginationButtons(current, total) {
 // Mudar de página
 function changePage(page) {
     currentPage = page; // atualiza a página atual
-    atualizarTabelaAuditorias(); 
+    atualizarTabelaAuditorias();
     updatePagination();
 }
 
@@ -736,7 +745,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupRemoveButton();
     setupHeaderCheckbox();
 
-    
+
     // --------- ATUALIZAR TABELA / PAGINAÇÃO ---------
     atualizarTabelaAuditorias(auditoriasFiltradasPesquisa);
     updatePagination(auditoriasFiltradasPesquisa);
@@ -771,12 +780,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('[data-sort="antiga"]').classList.add('active');
         }
     });
-     
+
     // Tipo de Ocorrencia
     document.querySelectorAll('[data-tipo]').forEach(btn => {
         btn.addEventListener('click', () => {
             const tipo = btn.getAttribute('data-tipo');
-            filterByTipoAuditoria(tipo); 
+            filterByTipoAuditoria(tipo);
             btn.classList.toggle('active');
         });
     });
@@ -798,7 +807,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePagination();
         });
     });
-    
+
     // -------------------- FILTROS DE PESQUISA --------------------
     document.getElementById('searchButton').addEventListener('click', () => {
         // Atualizar variáveis globais

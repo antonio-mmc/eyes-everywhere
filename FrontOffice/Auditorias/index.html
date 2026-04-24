@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="EyesEveryWhere — Plataforma de monitorização e gestão de infraestruturas públicas no concelho de Braga." />
   <title>EyesEveryWhere</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/x-icon" href="../imagens/minilogo.png">
 </head>
-<body>
-<!-- Cabeçalho -->
-  <div class="menu-toggle">☰</div>
 
-  <div class="navbar-grid">
+<body>
+  <!-- Cabeçalho -->
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <nav class="navbar-grid">
     <div class="nav-item"><a href="#sobre-nos">SOBRE NÓS</a></div>
     <div class="nav-item"><a href="#area-atuacao">ÁREAS DE ATUAÇÃO</a></div>
 
     <div class="logo" id="logoLink">
-      <img src="../imagens/logo.png" alt="Logo" />
+      <img src="../imagens/logo.png" alt="EyesEveryWhere Logo" />
     </div>
 
-    <div class="nav-item"><a href="#contanct">CONTACTE-NOS</a></div>
+    <div class="nav-item"><a href="#contact">CONTACTE-NOS</a></div>
 
     <div class="auth-buttons" id="loginContainer">
       <a href="../../BackOffice/Login/LoginEyesEverywhere.html">
         <button class="btn btn-login">Login</button>
       </a>
     </div>
-  </div>
+  </nav>
 
-  <div class="sidebar" id="sidebar">
+  <!-- Menu Lateral -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-top">
       <h2 class="sidebar-title">EyesEveryWhere</h2>
       <ul class="sidebar-list">
         <li>
-          <a href="../Auditorias/index.html" class="sidebar-link">
+          <a href="#" class="sidebar-link" id="inicioLink">
             <span class="icon">🏠</span>
             <span class="label">Início</span>
           </a>
@@ -46,13 +51,13 @@
         </li>
         <li>
           <a href="../Minhas Ocorr 1/Index.html" class="sidebar-link">
-            <span class="icon">✏️</span>
+            <span class="icon">📋</span>
             <span class="label">Minhas Ocorrências</span>
           </a>
         </li>
         <li>
           <a href="../Ocorrências Pub. 1 inc/Index.html" class="sidebar-link">
-            <span class="icon">✏️</span>
+            <span class="icon">👁️</span>
             <span class="label">Ver Ocorrências</span>
           </a>
         </li>
@@ -62,14 +67,22 @@
             <span class="label">Histórico de Auditorias</span>
           </a>
         </li>
-        <li><span class="icon">💬</span><span class="label">Notificações</span><span class="badge">1</span></li>
+        <li>
+          <span class="icon">💬</span>
+          <span class="label">Notificações</span>
+          <span class="badge">0</span>
+        </li>
       </ul>
     </div>
     <div class="sidebar-bottom">
-      <button class="btn-logout" id="logoutButton"><span class="icon">🔒</span><span class="label">Logout</span></button>
+      <!-- JS will set the content (Login or Logout) based on auth state -->
+      <button id="sidebarAuthButton" class="btn-logout">
+        <span class="icon">🔒</span>
+        <span class="label">Logout</span>
+      </button>
     </div>
-  </div>
-  
+  </aside>
+
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
@@ -85,162 +98,205 @@
   <!-- Áreas de Atuação -->
   <section id="area-atuacao" class="area-atuacao">
     <h1>Áreas de Atuação</h1>
+    <p class="section-subtitle">Conheça as principais áreas onde atuamos para melhorar a qualidade urbana de Braga.</p>
     <div class="cards-container">
-      <div class="card">
-        <img src="../imagens/area_atuacao1.png" alt="Infraestruturas e Vias Públicas">
+      <article class="card">
+        <div class="card-image-wrapper">
+          <img src="../imagens/area_atuacao1.png" alt="Infraestruturas e Vias Públicas">
+        </div>
         <div class="card-content">
           <h2>Infraestruturas e Vias Públicas</h2>
-          <p>Passeios Danificados<br>Falta de sinalização<br>Buracos na Estrada<br>Iluminação Pública</p>
+          <p>Passeios Danificados · Falta de sinalização · Buracos na Estrada · Iluminação Pública</p>
+          <span class="card-cta">Saber mais →</span>
         </div>
-      </div>
-      
-      <div class="card">
-        <img src="../imagens/area_atuacao2.png" alt="Monotorização e Gestão de Ocorrências">
+      </article>
+
+      <article class="card">
+        <div class="card-image-wrapper">
+          <img src="../imagens/area_atuacao2.png" alt="Monitorização e Gestão de Ocorrências">
+        </div>
         <div class="card-content">
           <h2>Monitorização e Gestão de Ocorrências</h2>
-          <p>Identificação e acompanhamento de problemas urbanos relatados</p>
+          <p>Identificação e acompanhamento de problemas urbanos relatados pelos cidadãos em tempo real.</p>
+          <span class="card-cta">Saber mais →</span>
         </div>
-      </div>
-      
-      <div class="card">
-        <img src="../imagens/area_atuacao3.png" alt="Auditorias e Inspeções Técnicas">
+      </article>
+
+      <article class="card">
+        <div class="card-image-wrapper">
+          <img src="../imagens/area_atuacao3.png" alt="Auditorias e Inspeções Técnicas">
+        </div>
         <div class="card-content">
           <h2>Auditorias e Inspeções Técnicas</h2>
-          <p>Avaliação da qualidade das infraestruturas e recomendação de ações corretivas</p>
+          <p>Avaliação da qualidade das infraestruturas e recomendação de ações corretivas especializadas.</p>
+          <span class="card-cta">Saber mais →</span>
         </div>
-      </div>
+      </article>
     </div>
   </section>
 
   <!-- Imagem do Capacete -->
-    <section class="imagem-secundaria">
-      <img src="../imagens/capacete.png" alt="Capacete">
-    </section>
+  <section class="imagem-secundaria">
+    <img src="../imagens/capacete.png" alt="Capacete de segurança">
+  </section>
 
   <!-- Sobre Nós -->
- <section id="sobre-nos">
-  <div class="conteudo">
-    <div class="titulo">Profissionalismo e Responsabilidade!</div>
-    <div class="content-container">
-      <div class="box-sobre texto-box">
-        <h2>SOBRE NÓS</h2>
-        <p>Monitorização de todas as vias públicas e infraestruturas através de todos os cidadãos e trabalhadores.</p>
-        <button class="btn">Ver Mais</button>
+  <section id="sobre-nos">
+    <div class="conteudo">
+      <div class="titulo">Profissionalismo e Responsabilidade!</div>
+      <div class="content-container">
+        <div class="box-sobre texto-box">
+          <h2>SOBRE NÓS</h2>
+          <p>Monitorização de todas as vias públicas e infraestruturas através de todos os cidadãos e trabalhadores.</p>
+          <button class="btn">Ver Mais</button>
+        </div>
+        <div class="box-sobre image-box">
+          <img src="../imagens/sobrenos.png" alt="Sobre Nós" />
+        </div>
       </div>
-      <div class="box-sobre image-box">
-        <img src="../imagens/sobrenos.png" alt="Sobre Nós" />
+      <!-- Estatísticas -->
+      <div class="stats-section">
+        <div class="stat">
+          <div class="value">20</div>
+          <div class="label">Auditorias Realizadas</div>
+        </div>
+        <div class="stat">
+          <div class="value">+50</div>
+          <div class="label">Profissionais</div>
+        </div>
+        <div class="stat">
+          <div class="value">30 Minutos</div>
+          <div class="label">Tempo médio de Resposta</div>
+        </div>
+        <div class="stat">
+          <div class="value">9.5/10</div>
+          <div class="label">Média de Satisfação</div>
+        </div>
       </div>
     </div>
-    <!-- Estatísticas -->
-    <div class="stats-section">
-      <div class="stat">
-        <div class="value">20</div>
-        <div class="label">Auditorias Realizadas</div>
-      </div>
-      <div class="stat">
-        <div class="value">+50</div>
-        <div class="label">Profissionais</div>
-      </div>
-      <div class="stat">
-        <div class="value">30 Minutos</div>
-        <div class="label">Tempo médio de Resposta</div>
-      </div>
-      <div class="stat">
-        <div class="value">9.5/10</div>
-        <div class="label">Média de Satisfação</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- Clientes -->
   <section class="clientes">
-    <img src="../imagens/Clients.png" alt="Clientes">
+    <img src="../imagens/Clients.png" alt="Nossos Clientes">
   </section>
 
   <!-- Contacto -->
-  <section id="contanct" class="contacto">
-    <div class="contacto-container">
-      <div class="formulario">
-        <h2>Entre em <span class="azul">Contacto</span></h2>
-        <p>Comunique qualquer mensagem.</p>
-        <p class="opcional">Preencha os dados de forma opcional.</p>
-        <form>
-          <input type="text" placeholder="Nome">
-          <input type="email" placeholder="Email">
-          <input type="tel" placeholder="Nº telemóvel">
-          <textarea placeholder="Mensagem"></textarea>
-          <button type="submit">Submeter</button>
-        </form>
-      </div>
-      <div class="mapa">
-        <img src="../imagens/Basemap image.png" alt="Mapa">
-      </div>
-    </div>
+  <section id="contact" class="contacto">
+    <div class="contacto-wrapper">
+      <div class="contacto-container glass-panel">
+        <div class="formulario">
+          <h2>Entre em <span class="highlight-text">Contacto</span></h2>
+          <p>Estamos disponíveis para esclarecer qualquer dúvida.</p>
+          <p class="opcional">Preencha os seus dados para sermos mais rápidos a ajudar.</p>
 
-    <div class="dados-empresa">
-      <div class="info-box">
-        <img src="../imagens/phoneicon.png" alt="Telefone" />
-        <p><strong>Número de Telemóvel</strong></p>
+          <form id="contactForm">
+            <div class="input-group">
+              <input type="text" id="contactName" placeholder="Nome completo" required>
+            </div>
+            <div class="input-group">
+              <input type="email" id="contactEmail" placeholder="Endereço de email" required>
+            </div>
+            <div class="input-group">
+              <input type="tel" id="contactPhone" placeholder="Nº telemóvel (Opcional)">
+            </div>
+            <div class="input-group">
+              <textarea id="contactMessage" placeholder="Como podemos ajudar?" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Enviar Mensagem</button>
+            <div id="contactFeedback" class="form-feedback"></div>
+          </form>
+        </div>
+
+        <div class="mapa">
+          <div class="mapa-frame">
+            <img src="../imagens/Basemap image.png" alt="Mapa de Braga">
+            <div class="mapa-overlay">
+              <span>Sede Central — Braga</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="info-box">
-        <img src="../imagens/localizacaoicon.png" alt="Morada" />
-        <p><strong>Morada</strong></p>
-      </div>
-      <div class="info-box">
-        <img src="../imagens/emailicon.png" alt="Email" />
-        <p><strong>Email</p>
+
+      <div class="dados-empresa">
+        <div class="info-box">
+          <div class="icon-wrapper">
+            <img src="../imagens/phoneicon.png" alt="Telefone" />
+          </div>
+          <p><strong>+351 253 000 000</strong></p>
+          <span>Disponível 24/7</span>
+        </div>
+        <div class="info-box">
+          <div class="icon-wrapper">
+            <img src="../imagens/localizacaoicon.png" alt="Morada" />
+          </div>
+          <p><strong>Braga, Portugal</strong></p>
+          <span>Concelho inteiro</span>
+        </div>
+        <div class="info-box">
+          <div class="icon-wrapper">
+            <img src="../imagens/emailicon.png" alt="Email" />
+          </div>
+          <p><strong>eyeseverywhere@gmail.com</strong></p>
+          <span>Suporte online</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Locais-Cobertos -->
+  <!-- Locais Cobertos -->
   <section class="locais-cobertos">
     <div class="locais-container">
       <div class="texto-locais">
-        <div class="titulo-decorado">
-          <h2>"Locais Cobertos"</h2>
-          <div class="linha-decorativa">
-            <span class="estrela">✦</span>
-          </div>
-        </div>
-        <p>Atuamos em todo o território do <strong>concelho de Braga</strong>, desde as pequenas aldeias até à grande Cidade</p>
+        <span class="badge-title">COBERTURA TOTAL</span>
+        <h2>Presentes em <br><span class="highlight">Todo o Concelho</span></h2>
+        <p>A nossa infraestrutura tecnológica permite-nos monitorizar desde as ruas mais movimentadas do centro da
+          cidade até às vias das freguesias mais periféricas de Braga.</p>
+        <ul class="cobertura-lista">
+          <li>✓ Resposta rápida em todas as freguesias</li>
+          <li>✓ Monitorização 24 horas por dia</li>
+          <li>✓ Equipas no terreno estrategicamente distribuídas</li>
+        </ul>
       </div>
       <div class="imagem-locais">
-        <img src="../imagens/braga.jpg" alt="Mapa de Braga" />
+        <div class="map-showcase">
+          <img src="../imagens/braga.jpg" alt="Mapa de Braga com zona de cobertura" />
+          <div class="pulse-point"></div>
+        </div>
       </div>
     </div>
   </section>
-  
-  
+
   <!-- Rodapé -->
   <footer>
     <div class="footer-content">
       <div class="footer-column">
         <h4>EyesEveryWhere</h4>
-        <p>EyesEveryWhere é responsável pela <strong>monitorização e gestão</strong> de infraestruturas e vias públicas.</p>
-        <p>Ajudamos a reportar e acompanhar ocorrências, coordenar intervenções e melhorar a qualidade e eficiência dos espaços urbanos.</p>
+        <p>EyesEveryWhere é responsável pela <strong>monitorização e gestão</strong> de infraestruturas e vias públicas.
+        </p>
+        <p>Ajudamos a reportar e acompanhar ocorrências, coordenar intervenções e melhorar a qualidade e eficiência dos
+          espaços urbanos.</p>
       </div>
       <div class="footer-column">
         <h4>Ocorrências</h4>
         <ul>
           <li><a href="../Tipo de Ocorr/index.html">→ Nova Ocorrência</a></li>
           <li><a href="../Minhas Ocorr 1/Index.html">→ Minhas Ocorrências</a></li>
-          <li><a href="../Ocorrências Pub. 1 inc/Index.html">→ Ver Ocorrências </a></li>
+          <li><a href="../Ocorrências Pub. 1 inc/Index.html">→ Ver Ocorrências</a></li>
         </ul>
       </div>
       <div class="footer-column">
         <h4>Empresa</h4>
         <ul>
-          <li><a href="#">→ Term Of Services</a></li>
-          <li><a href="#">→ Privacy Policy</a></li>
-          <li><a href="#">→ License & Regulation</a></li>
+          <li>— <a href="../Legal/termos.html">Termos de Serviço</a></li>
+          <li>— <a href="../Legal/privacidade.html">Política de Privacidade</a></li>
+          <li>— <a href="../Legal/licencas.html">Licenças e Regulamentos</a></li>
         </ul>
       </div>
       <div class="footer-column">
         <h4>Contacte-Nos</h4>
         <ul class="contact-info">
-          <li><img src="../imagens/phoneicon.png" alt="Telefone"> +351 934 678 456</li>
+          <li><img src="../imagens/phoneicon.png" alt="Telefone"> +351 253 000 000</li>
           <li><img src="../imagens/emailicon.png" alt="Email"> eyeseverywhere@gmail.com</li>
           <li><img src="../imagens/net.png" alt="Website"> eyeseverywhere.com</li>
         </ul>
@@ -249,30 +305,34 @@
 
     <!-- Botões de Login no Rodapé -->
     <div class="footer-login">
-      <button class="login-btn">Login</button>
+      <button id="footerAuthButton" class="login-btn">Login</button>
     </div>
 
     <!-- Base do rodapé -->
     <div class="footer-bottom">
-      <p>© 2024 All Rights Reserved.</p>
-      <div class="footer-links">
-        <a href="#">Term Of Service</a>
-        <a href="#">Policy Service</a>
+      <p>© 2024 EyesEveryWhere. Todos os direitos reservados.</p>
+      <div class="footer-bottom-links">
+        <a href="../Legal/termos.html">Termos de Serviço</a>
+        <a href="../Legal/privacidade.html">Política de Privacidade</a>
       </div>
     </div>
   </footer>
 
-  <!-- Modal-Sobre-Nós -->
+  <!-- Modal — Sobre Nós -->
   <div id="sobreNosModal" class="modal">
     <div class="modal-content">
       <button class="close-btn">&times;</button>
       <h2>Sobre Nós</h2>
-      <p>A EyesEveryWhere é uma empresa dedicada à monitorização e manutenção de infraestruturas públicas no concelho de Braga. A nossa missão é garantir a segurança e qualidade das vias públicas através de um sistema integrado de gestão de ocorrências.</p>
-      <p>Trabalhamos em estreita colaboração com o município e com os cidadãos para identificar, reportar e resolver problemas em tempo hábil. A nossa equipa de profissionais qualificados está comprometida em melhorar a qualidade de vida dos habitantes do nosso concelho.</p>
+      <p>A EyesEveryWhere é uma empresa dedicada à monitorização e manutenção de infraestruturas públicas no concelho de
+        Braga. A nossa missão é garantir a segurança e qualidade das vias públicas através de um sistema integrado de
+        gestão de ocorrências.</p>
+      <p>Trabalhamos em estreita colaboração com o município e com os cidadãos para identificar, reportar e resolver
+        problemas em tempo hábil. A nossa equipa de profissionais qualificados está comprometida em melhorar a qualidade
+        de vida dos habitantes do nosso concelho.</p>
     </div>
   </div>
 
-  <!-- Modais-para-Áreas-de-Atuação -->
+  <!-- Modal — Infraestruturas -->
   <div id="modalInfraestruturas" class="modal">
     <div class="modal-content">
       <button class="close-btn">&times;</button>
@@ -287,11 +347,12 @@
     </div>
   </div>
 
+  <!-- Modal — Monitorização -->
   <div id="modalMonitorizacao" class="modal">
     <div class="modal-content">
       <button class="close-btn">&times;</button>
       <h2>Monitorização e Gestão</h2>
-      <p>Nossa plataforma oferece:</p>
+      <p>A nossa plataforma oferece:</p>
       <ul>
         <li>Acompanhamento em tempo real</li>
         <li>Sistema de notificações</li>
@@ -301,6 +362,7 @@
     </div>
   </div>
 
+  <!-- Modal — Auditorias -->
   <div id="modalAuditorias" class="modal">
     <div class="modal-content">
       <button class="close-btn">&times;</button>
@@ -315,6 +377,8 @@
     </div>
   </div>
 
+  <script src="/FrontOffice/mockDataSeeder.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>

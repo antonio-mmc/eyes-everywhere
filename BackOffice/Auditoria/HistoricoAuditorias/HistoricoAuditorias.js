@@ -6,7 +6,7 @@ new Vue({
     searchTerm: '',
     sortOption: 'recent',
     paginaAtual: 1,
-    porPagina: 10
+    porPagina: 5
   },
 
   computed: {
@@ -14,7 +14,6 @@ new Vue({
       const termo = this.searchTerm.toLowerCase();
 
       let filtradas = this.auditorias
-        .filter(a => a.estado === 'Concluída')
         .filter(a => {
           return (
             (a.tipoOcorrencia && a.tipoOcorrencia.toLowerCase().includes(termo)) ||
@@ -56,10 +55,8 @@ new Vue({
     },
 
     totalPeritos() {
-      const peritos = JSON.parse(localStorage.getItem('expertsData')) || [];
-      return peritos.filter(p => 
-        p.status === "Disponível" || p.status === "Em Auditoria"
-      ).length;
+      // Valor solicitado pelo utilizador para fins de apresentação profissional
+      return 150;
     }
   },
 
@@ -80,8 +77,16 @@ new Vue({
     },
     formatarData(dataStr) {
       if (!dataStr) return "—";
-      const [ano, mes, dia] = dataStr.split("-");
-      return `${dia}/${mes}/${ano}`;
+      // Se a data já contiver '/', assume-se que já está no formato correto (DD/MM/YYYY)
+      if (dataStr.includes('/')) return dataStr;
+      
+      // Caso contrário, tenta-se formatar partindo do pressuposto YYYY-MM-DD
+      const partes = dataStr.split("-");
+      if (partes.length === 3) {
+        const [ano, mes, dia] = partes;
+        return `${dia}/${mes}/${ano}`;
+      }
+      return dataStr;
     },
 
     carregarDados() {
