@@ -91,20 +91,8 @@ O desenvolvimento do EyesEveryWhere seguiu uma metodologia Ã¡gil e iterativa:
     ```bash
     npm start
     ```
-2.  Aceda Ã s interfaces:
+2.  Aceda Ã  interface:
     *   **Portal Principal (FrontOffice):** `http://localhost:3000/`
-    *   **Dashboard Moderno (Vue Core):** `http://localhost:3000/app`
 
 ---
 
-
-## ?? O Processo (Método PAR)
-
-### ?? Problema (The Challenge)
-A gestão de infraestruturas urbanas (buracos nas estradas, iluminação pública deficiente ou passeios danificados) em muitas cidades ainda depende de processos manuais, lentos e pouco transparentes. Os cidadãos sentem-se frustrados por não terem um canal direto para reportar problemas, e as autarquias têm dificuldade em priorizar intervenções e gerir auditorias de forma eficiente por falta de dados centralizados e geolocalizados.
-
-### ?? Ação (The Solution)
-Desenvolvi a **EyesEveryWhere**, uma plataforma full-stack que liga cidadãos e peritos municipais. Implementei um sistema de geocodificação inversa (OpenStreetMap/Nominatim) para permitir que qualquer pessoa reporte uma ocorrência clicando simplesmente num mapa interativo. No BackOffice, construí um ecossistema de gestão robusto que permite aos administradores converter ocorrências em auditorias, atribuir peritos especializados e monitorizar o histórico de intervenções em tempo real com indicadores dinâmicos de performance.
-
-### ?? Resultado (The Impact)
-O resultado é uma solução digital "Gold Standard" que democratiza a manutenção urbana. A plataforma garante 100% de rastreabilidade desde o reporte até à conclusão da auditoria. Tecnicamente, consegui uma interface de utilizador fluida e moderna (Glassmorphism) com gestão de estado resiliente (Session/LocalStorage), resultando num sistema capaz de gerir centenas de peritos e milhares de ocorrências com precisão geográfica e tempos de resposta administrativos otimizados.
